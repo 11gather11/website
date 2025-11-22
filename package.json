@@ -6,26 +6,34 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev",
-		"check": "biome check && prettier --check '**/*.astro'",
-		"check:fix": "biome check --fix && prettier --write '**/*.astro'",
 		"build": "astro build",
 		"preview": "astro preview",
-		"typecheck": "astro check",
+		"check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
+		"check:astro": "astro check",
+		"check:eslint": "eslint .",
+		"check:prettier": "prettier --check .",
+		"fix": "npm run fix:eslint && npm run fix:prettier",
+		"fix:eslint": "eslint --fix .",
+		"fix:prettier": "prettier --write .",
 		"knip": "knip"
 	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.5",
 		"@astrojs/ts-plugin": "1.10.5",
+		"@eslint/js": "9.39.1",
 		"@tailwindcss/vite": "4.1.17",
 		"@types/node": "24.10.1",
 		"astro": "5.16.0",
+		"eslint": "9.39.1",
+		"globals": "16.5.0",
 		"knip": "5.70.1",
 		"lefthook": "2.0.4",
 		"prettier": "3.6.2",
 		"prettier-plugin-astro": "0.14.1",
-		"prettier-plugin-tailwindcss": "0.7.1",
 		"tailwindcss": "4.1.17",
-		"typescript": "5.9.3"
+		"typescript": "5.9.3",
+		"typescript-eslint": "8.47.0",
+		"wrangler": "4.50.0"
 	},
 	"packageManager": "bun@1.3.3"
 }
