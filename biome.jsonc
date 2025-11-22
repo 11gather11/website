@@ -26,5 +26,39 @@
 			"semicolons": "asNeeded",
 			"quoteStyle": "single"
 		}
-	}
+	},
+	"html": {
+		"formatter": {
+			"indentScriptAndStyle": true
+		}
+	},
+	"css": {
+		"formatter": {
+			"enabled": true,
+			"quoteStyle": "single"
+		},
+		"parser": {
+			"tailwindDirectives": true
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
+			"formatter": {
+				"enabled": false
+			},
+			"linter": {
+				"rules": {
+					"style": {
+						"useConst": "off",
+						"useImportType": "off"
+					},
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	]
 }
