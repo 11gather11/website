@@ -27,7 +27,6 @@
 		"@astrojs/ts-plugin": "1.10.5",
 		"@eslint/js": "9.39.1",
 		"@types/node": "24.10.1",
-		"@typescript-eslint/parser": "8.48.0",
 		"astro-eslint-parser": "1.2.2",
 		"eslint": "9.39.1",
 		"eslint-config-prettier": "10.1.8",
