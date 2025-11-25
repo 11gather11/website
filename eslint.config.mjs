@@ -3,10 +3,10 @@ import typescriptEslintParser from '@typescript-eslint/parser'
 import astroParser from 'astro-eslint-parser'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginAstro from 'eslint-plugin-astro'
+import tailwindcss from 'eslint-plugin-better-tailwindcss'
 import importPlugin from 'eslint-plugin-import'
 import jsxA11yPlugin from 'eslint-plugin-jsx-a11y'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
-import tailwindcss from 'eslint-plugin-tailwindcss'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 
@@ -18,8 +18,6 @@ export default [
 
 	...tseslint.configs.recommended,
 
-	...tailwindcss.configs['flat/recommended'],
-
 	{
 		plugins: {
 			'jsx-a11y': jsxA11yPlugin,
@@ -29,7 +27,12 @@ export default [
 	...eslintPluginAstro.configs['jsx-a11y-recommended'],
 
 	{
-		languageOptions: { globals: globals.browser },
+		languageOptions: {
+			globals: {
+				...globals.browser,
+				...globals.node,
+			},
+		},
 	},
 
 	{
@@ -37,6 +40,14 @@ export default [
 			'import/resolver': {
 				typescript: {},
 			},
+		},
+		rules: {
+			'import/no-unresolved': [
+				'error',
+				{
+					ignore: ['^astro:'],
+				},
+			],
 		},
 	},
 
@@ -47,6 +58,22 @@ export default [
 			parserOptions: {
 				parser: typescriptEslintParser,
 				extraFileExtensions: ['.astro'],
+			},
+		},
+	},
+
+	{
+		plugins: {
+			'better-tailwindcss': tailwindcss,
+		},
+		rules: {
+			...tailwindcss.configs['recommended-warn'].rules,
+
+			...tailwindcss.configs['recommended-error'].rules,
+		},
+		settings: {
+			'better-tailwindcss': {
+				entryPoint: 'src/styles/global.css',
 			},
 		},
 	},
