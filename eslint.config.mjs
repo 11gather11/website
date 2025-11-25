@@ -41,7 +41,7 @@ export default [
 	},
 
 	{
-		files: ['*.astro'],
+		files: ['**/*.astro'],
 		languageOptions: {
 			parser: astroParser,
 			parserOptions: {

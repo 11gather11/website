@@ -4,12 +4,12 @@
 		"parallel": true,
 		"commands": {
 			"eslint": {
-				"glob": "*.{js,mjs,ts,tsx,astro}",
+				"glob": "**/*.{js,mjs,ts,tsx,astro}",
 				"run": "bun eslint {staged_files} --fix",
 				"stage_fixed": true
 			},
 			"prettier": {
-				"glob": "*.{js,mjs,ts,tsx,css,scss,md,astro,json,html}",
+				"glob": "**/*.{js,mjs,ts,tsx,css,scss,md,astro,json,html}",
 				"run": "bun prettier --write --ignore-unknown {staged_files}",
 				"stage_fixed": true
 			}
