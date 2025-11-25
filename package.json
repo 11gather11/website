@@ -17,14 +17,17 @@
 		"fix:prettier": "prettier --write .",
 		"knip": "knip"
 	},
+	"dependencies": {
+		"@tailwindcss/vite": "4.1.17",
+		"astro": "5.16.0",
+		"tailwindcss": "4.1.17"
+	},
 	"devDependencies": {
 		"@astrojs/check": "0.9.5",
 		"@astrojs/ts-plugin": "1.10.5",
 		"@eslint/js": "9.39.1",
-		"@tailwindcss/vite": "4.1.17",
 		"@types/node": "24.10.1",
 		"@typescript-eslint/parser": "8.48.0",
-		"astro": "5.16.0",
 		"astro-eslint-parser": "1.2.2",
 		"eslint": "9.39.1",
 		"eslint-config-prettier": "10.1.8",
@@ -39,7 +42,6 @@
 		"lefthook": "2.0.4",
 		"prettier": "3.6.2",
 		"prettier-plugin-astro": "0.14.1",
-		"tailwindcss": "4.1.17",
 		"typescript": "5.9.3",
 		"typescript-eslint": "8.48.0",
 		"wrangler": "4.50.0"
