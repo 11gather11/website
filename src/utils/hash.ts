@@ -1,5 +1,3 @@
-import CryptoJS from 'crypto-js'
-
 import { siteConfig } from '@/config/site'
 
 /**
@@ -26,10 +24,7 @@ import { siteConfig } from '@/config/site'
  * idToSlug("hello-world") // "hello-world"
  * ```
  */
-export const idToSlug = (
-	slug: string,
-	length = siteConfig.slugLength
-): string => {
+export const idToSlug = (slug: string, length = siteConfig.slugLength): string => {
 	if (!slug.trim()) {
 		throw new Error('Slug cannot be empty')
 	}
@@ -43,9 +38,7 @@ export const idToSlug = (
 
 	switch (siteConfig.slugMode) {
 		case 'HASH': {
-			const hash = CryptoJS.SHA256(slug)
-			const hashedSlug = hash.toString(CryptoJS.enc.Hex).slice(0, length)
-			return hashedSlug
+			return slug
 		}
 		case 'RAW':
 			return slug

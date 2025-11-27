@@ -29,7 +29,6 @@
 		"astro": "5.16.1",
 		"astro-icon": "1.1.5",
 		"astro-pagefind": "1.8.5",
-		"crypto-js": "4.2.0",
 		"lozad": "1.16.0",
 		"mdast-util-to-string": "4.0.0",
 		"overlayscrollbars": "2.13.0",
