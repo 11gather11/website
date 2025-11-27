@@ -1,5 +1,9 @@
 ---
+import '@/styles/globals.css'
+
 import BaseHead from '@/components/common/BaseHead.astro'
+import BasicScripts from '@/components/common/BasicScripts.astro'
+import CommonMeta from '@/components/common/CommonMeta.astro'
 import { siteConfig } from '@/config/site'
 
 interface Props {
@@ -9,10 +13,16 @@ interface Props {
 const { title } = Astro.props
 ---
 
+<!doctype html>
 <html lang={siteConfig.lang}>
-	<BaseHead title={title} />
+	<head>
+		<CommonMeta />
+		<BaseHead title={title} />
+	</head>
 	<body class="overflow-y-hidden">
 		<slot />
+
+		<BasicScripts />
 	</body>
 </html>
 
