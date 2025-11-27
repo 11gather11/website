@@ -9,9 +9,9 @@ export default defineConfig({
 
 	site: SITE.site,
 
-	integrations: [sitemap()],
-
 	vite: {
 		plugins: [tailwindcss()],
 	},
+
+	integrations: [sitemap()],
 })
