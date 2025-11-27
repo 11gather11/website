@@ -7,7 +7,7 @@ interface Props {
 const { year, count } = Astro.props
 ---
 
-<div class="mb-2 flex w-full flex-row items-center">
+<div class='mb-2 flex w-full flex-row items-center'>
 	<!-- 年表示部分 -->
 	<div
 		class={`
@@ -15,7 +15,7 @@ const { year, count } = Astro.props
    md:w-[10%]
  `}
 	>
-		<p class="year text-2xl font-bold text-foreground select-none">
+		<p class='year text-2xl font-bold text-foreground select-none'>
 			{year}
 		</p>
 	</div>
@@ -38,7 +38,7 @@ const { year, count } = Astro.props
 
 	<!-- 記事数表示部分 -->
 	<div>
-		<p class="count text-foreground-lighten select-none">
+		<p class='count text-foreground-lighten select-none'>
 			{count}件の記事
 		</p>
 	</div>

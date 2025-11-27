@@ -27,19 +27,19 @@ const displaySubtitle = subTitle ?? siteConfig.subtitle
 const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefined)
 ---
 
-<div id="banner" class="banner onload-animation-fade-in">
-	<div class="transition-main banner-inner h-full w-full">
+<div id='banner' class='banner onload-animation-fade-in'>
+	<div class='transition-main banner-inner h-full w-full'>
 		<!-- カルーセル表示（画像が指定されていない場合） -->
 		{
 			!hasHeaderImg && (
-				<div class="carousel">
-					<ul id="carousel_images">
+				<div class='carousel'>
+					<ul id='carousel_images'>
 						{carouselImagesList.map((img, index) => (
 							<li
-								class="item lozad"
+								class='item lozad'
 								style={{ animationDelay: `${index * 6}s` }}
 								data-background-image={img}
-								role="img"
+								role='img'
 								aria-label={`バナー画像 ${index + 1}`}
 							/>
 						))}
@@ -51,65 +51,65 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 		<!-- 静的画像表示（画像が指定されている場合） -->
 		{
 			hasHeaderImg && (
-				<div class="cover">
-					<img class="item lozad" data-src={bannerImageUrl} alt={title ? `${title}のバナー画像` : 'バナー画像'} />
+				<div class='cover'>
+					<img class='item lozad' data-src={bannerImageUrl} alt={title ? `${title}のバナー画像` : 'バナー画像'} />
 				</div>
 			)
 		}
 
 		<!-- タイトル・サブタイトル表示エリア -->
-		<div class="relative h-[95%] w-full">
+		<div class='relative h-[95%] w-full'>
 			<div
 				class={`
       absolute top-1/2 left-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2
       lg:w-3/4
     `}
 			>
-				<div class="flex flex-col">
-					<h1 class:list={[hasTitle ? 'title-normal' : 'title-index']} class="title">
+				<div class='flex flex-col'>
+					<h1 class:list={[hasTitle ? 'title-normal' : 'title-index']} class='title'>
 						{displayTitle}
 					</h1>
-					<h2 class="subtitle">{displaySubtitle}</h2>
+					<h2 class='subtitle'>{displaySubtitle}</h2>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 波のSVGアニメーション -->
-	<div class="waves" id="header-waves">
+	<div class='waves' id='header-waves'>
 		<svg
-			class="waves"
-			xmlns="http://www.w3.org/2000/svg"
-			xmlns:xlink="http://www.w3.org/1999/xlink"
-			viewBox="0 24 150 28"
-			preserveAspectRatio="none"
-			shape-rendering="auto"
-			role="img"
-			aria-label="装飾的な波のアニメーション"
+			class='waves'
+			xmlns='http://www.w3.org/2000/svg'
+			xmlns:xlink='http://www.w3.org/1999/xlink'
+			viewBox='0 24 150 28'
+			preserveAspectRatio='none'
+			shape-rendering='auto'
+			role='img'
+			aria-label='装飾的な波のアニメーション'
 		>
 			<defs>
-				<path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"> </path>
+				<path id='gentle-wave' d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'> </path>
 			</defs>
-			<g class="parallax">
+			<g class='parallax'>
 				<use
-					xlink:href="#gentle-wave"
-					x="48"
-					y="0"
-					class="opacity-25"
+					xlink:href='#gentle-wave'
+					x='48'
+					y='0'
+					class='opacity-25'
 					style={{ animationDelay: '-2s', animationDuration: '7s' }}></use>
 				<use
-					xlink:href="#gentle-wave"
-					x="48"
-					y="3"
-					class="opacity-50"
+					xlink:href='#gentle-wave'
+					x='48'
+					y='3'
+					class='opacity-50'
 					style={{ animationDelay: '-3s', animationDuration: '10s' }}></use>
 				<use
-					xlink:href="#gentle-wave"
-					x="48"
-					y="5"
-					class="opacity-75"
+					xlink:href='#gentle-wave'
+					x='48'
+					y='5'
+					class='opacity-75'
 					style={{ animationDelay: '-4s', animationDuration: '13s' }}></use>
-				<use xlink:href="#gentle-wave" x="48" y="7" style={{ animationDelay: '-5s', animationDuration: '20s' }}></use>
+				<use xlink:href='#gentle-wave' x='48' y='7' style={{ animationDelay: '-5s', animationDuration: '20s' }}></use>
 			</g>
 		</svg>
 	</div>

@@ -52,14 +52,14 @@ const categorySlug = category ? category : null
 			alt={`${title}のカバー画像`}
 		/>
 		<!-- モバイル用オーバーレイ情報 -->
-		<div class="absolute bottom-2 w-full">
-			<div class="mx-2 flex flex-row justify-between">
+		<div class='absolute bottom-2 w-full'>
+			<div class='mx-2 flex flex-row justify-between'>
 				<!-- 公開日 -->
 				<div
 					class={`dark:text-foreground text-primary-lighten flex flex-row items-center space-x-2 rounded-md bg-black/50 px-1.5 py-0.5`}
 				>
-					<Icon name="tabler:calendar-week" />
-					<span class="select-none">
+					<Icon name='tabler:calendar-week' />
+					<span class='select-none'>
 						{formatDate(published)}
 					</span>
 				</div>
@@ -69,8 +69,8 @@ const categorySlug = category ? category : null
 						<div
 							class={`flex flex-row items-center space-x-2 rounded-md bg-black/50 px-1.5 py-0.5 text-primary-lighten dark:text-foreground`}
 						>
-							<Icon name="tabler:folder" />
-							<span class="max-w-28 truncate select-none">{category}</span>
+							<Icon name='tabler:folder' />
+							<span class='max-w-28 truncate select-none'>{category}</span>
 						</div>
 					)
 				}
@@ -94,7 +94,7 @@ const categorySlug = category ? category : null
    `}
 		>
 			<!-- タイトル -->
-			<div class="flex w-full flex-row items-center">
+			<div class='flex w-full flex-row items-center'>
 				<div
 					class={`
        bg-primary mx-2 hidden h-6 w-1 translate-y-[1px] rounded-lg
@@ -102,10 +102,10 @@ const categorySlug = category ? category : null
      `}
 				>
 				</div>
-				<a href={contentUrl} class="title group" aria-label={`記事「${title}」を読む`}>
-					<p class="truncate">{title}</p>
+				<a href={contentUrl} class='title group' aria-label={`記事「${title}」を読む`}>
+					<p class='truncate'>{title}</p>
 					<Icon
-						name="tabler:chevron-right"
+						name='tabler:chevron-right'
 						size={28}
 						class={`
         text-primary transition-all
@@ -123,13 +123,13 @@ const categorySlug = category ? category : null
      lg:block
    `}
 			>
-				<ul class="flex flex-row space-x-4">
+				<ul class='flex flex-row space-x-4'>
 					<!-- 公開日 -->
-					<li class="data space-x-2">
-						<div class="info-icon">
-							<Icon name="tabler:calendar-week" size={20} class="text-primary" />
+					<li class='data space-x-2'>
+						<div class='info-icon'>
+							<Icon name='tabler:calendar-week' size={20} class='text-primary' />
 						</div>
-						<span class="text-sm select-none">
+						<span class='text-sm select-none'>
 							{formatDate(published)}
 						</span>
 					</li>
@@ -137,9 +137,9 @@ const categorySlug = category ? category : null
 					<!-- カテゴリ -->
 					{
 						category && categorySlug && (
-							<li class="data space-x-1.5">
-								<div class="info-icon">
-									<Icon name="tabler:folder" size={20} class="text-primary" />
+							<li class='data space-x-1.5'>
+								<div class='info-icon'>
+									<Icon name='tabler:folder' size={20} class='text-primary' />
 								</div>
 								<a
 									class={`rounded-md px-1.5 py-0.5 text-sm text-foreground-lighten transition-all select-none hover:bg-primary-lighten hover:text-primary`}
@@ -163,14 +163,14 @@ const categorySlug = category ? category : null
 					>
 						{
 							tags && tags.length > 0 && (
-								<div class="data space-x-2">
-									<div class="info-icon">
-										<Icon name="tabler:tag" size={20} class="text-primary" />
+								<div class='data space-x-2'>
+									<div class='info-icon'>
+										<Icon name='tabler:tag' size={20} class='text-primary' />
 									</div>
-									<ul class="flex flex-row items-center space-x-1">
+									<ul class='flex flex-row items-center space-x-1'>
 										{tags.slice(0, 3).map((tag, index) => (
 											<li class={`flex flex-row items-center text-foreground-lighten select-none`}>
-												{index > 0 && <span class="pr-1 text-sm">/</span>}
+												{index > 0 && <span class='pr-1 text-sm'>/</span>}
 												<a
 													class={`rounded-md px-1.5 py-0.5 text-sm transition-all hover:bg-primary-lighten hover:text-primary`}
 													href={`/tags/${tag}`}
@@ -189,8 +189,8 @@ const categorySlug = category ? category : null
 			</div>
 
 			<!-- 記事の概要 -->
-			<div class="lg:ml-2">
-				<p class="desc">{excerpt}</p>
+			<div class='lg:ml-2'>
+				<p class='desc'>{excerpt}</p>
 			</div>
 
 			<!-- 読了時間情報 -->
@@ -201,7 +201,7 @@ const categorySlug = category ? category : null
       lg:ml-2
     `}
 				>
-					<div class="reading-time">
+					<div class='reading-time'>
 						<span>{words}</span>
 						<span>|</span>
 						<span>{minutes}</span>
@@ -211,9 +211,9 @@ const categorySlug = category ? category : null
 		</div>
 
 		<!-- デスクトップ用カバー画像 -->
-		<div class="cover-container">
-			<a href={contentUrl} class="cover-wrapper" aria-label={`記事「${title}」を読む`}>
-				<Icon class="right-icon" name="tabler:chevron-right" size={96} />
+		<div class='cover-container'>
+			<a href={contentUrl} class='cover-wrapper' aria-label={`記事「${title}」を読む`}>
+				<Icon class='right-icon' name='tabler:chevron-right' size={96} />
 				<img
 					class={`
        lozad h-[212px] w-[404px] rounded-r-3xl object-cover select-none

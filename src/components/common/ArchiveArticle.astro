@@ -10,7 +10,7 @@ interface Props {
 const { id, title, published } = Astro.props
 ---
 
-<div class="item">
+<div class='item'>
 	<a
 		href={id}
 		class={`
@@ -27,7 +27,7 @@ const { id, title, published } = Astro.props
     md:w-[10%]
   `}
 		>
-			<p class="date text-sm text-foreground-lighten">
+			<p class='date text-sm text-foreground-lighten'>
 				{
 					formatDate(published, {
 						month: '2-digit',
@@ -60,7 +60,7 @@ const { id, title, published } = Astro.props
     md:w-[80%]
   `}
 		>
-			<p class="title truncate font-semibold text-foreground transition-all">
+			<p class='title truncate font-semibold text-foreground transition-all'>
 				{title}
 			</p>
 		</div>

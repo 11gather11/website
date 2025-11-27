@@ -6,6 +6,7 @@ export default {
 	useTabs: true,
 	semi: false,
 	singleQuote: true,
+	jsxSingleQuote: true,
 	trailingComma: 'es5',
 	printWidth: 120,
 

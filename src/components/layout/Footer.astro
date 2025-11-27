@@ -26,7 +26,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay + 1
 const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryDisplay] : null
 ---
 
-<div class="mx-3 space-y-4">
+<div class='mx-3 space-y-4'>
 	<!-- オーナー情報カード -->
 	<div
 		class={`
@@ -41,32 +41,32 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
   `}
 		>
 			<a
-				href="/about"
+				href='/about'
 				class={`
      relative h-40 w-40
      md:hidden
    `}
 			>
-				<img class="lozad absolute top-0 left-0 h-40 rounded-l-3xl" data-src={siteConfig.avatarUrl} alt="Avatar" />
-				<div class="absolute top-0 right-0 h-40 w-20 bg-gradient-to-l from-card"></div>
+				<img class='lozad absolute top-0 left-0 h-40 rounded-l-3xl' data-src={siteConfig.avatarUrl} alt='Avatar' />
+				<div class='absolute top-0 right-0 h-40 w-20 bg-gradient-to-l from-card'></div>
 			</a>
 			<a
-				href="/about"
+				href='/about'
 				class={`
       mx-auto hidden h-40 w-40 cursor-pointer rounded-3xl transition-all
       hover:brightness-75
       md:block
     `}
 			>
-				<img class="lozad h-40 rounded-3xl" data-src={siteConfig.avatarUrl} alt="Avatar" />
+				<img class='lozad h-40 rounded-3xl' data-src={siteConfig.avatarUrl} alt='Avatar' />
 			</a>
-			<div class="flex grow flex-col justify-center space-y-4 p-4">
-				<div class="flex flex-col items-center">
-					<a href="/about" class="line-clamp-1 text-xl font-semibold text-foreground">
+			<div class='flex grow flex-col justify-center space-y-4 p-4'>
+				<div class='flex flex-col items-center'>
+					<a href='/about' class='line-clamp-1 text-xl font-semibold text-foreground'>
 						{siteConfig.username}
 					</a>
-					<span class="mt-1 mb-2 h-1 w-8 rounded-full bg-primary"></span>
-					<p class="line-clamp-1 text-foreground-lighten">
+					<span class='mt-1 mb-2 h-1 w-8 rounded-full bg-primary'></span>
+					<p class='line-clamp-1 text-foreground-lighten'>
 						{siteConfig.sign}
 					</p>
 				</div>
@@ -75,7 +75,7 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 						<ul class={`mx-auto grid max-w-xs grid-cols-4 justify-items-center gap-x-6 gap-y-2`}>
 							{siteConfig.socialLinks.map((item) => (
 								<li>
-									<a href={item.link} class="text-primary">
+									<a href={item.link} class='text-primary'>
 										<Icon name={item.icon} size={24} />
 									</a>
 								</li>
@@ -91,9 +91,9 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 	{
 		categories.size > 0 && (
 			<div class={`rounded-3xl bg-card p-4 transition-all lg:hidden`}>
-				<div class="mb-2 flex flex-row items-center space-x-2 pl-1.5">
-					<span class="h-6 w-1 rounded-full bg-primary" />
-					<span class="text-xl font-semibold text-foreground">カテゴリー</span>
+				<div class='mb-2 flex flex-row items-center space-x-2 pl-1.5'>
+					<span class='h-6 w-1 rounded-full bg-primary' />
+					<span class='text-xl font-semibold text-foreground'>カテゴリー</span>
 				</div>
 				<div class={`relative grid grid-cols-2 gap-1 md:grid-cols-3`}>
 					{displayCategories.map(([categorySlug, categoryData]) => (
@@ -101,8 +101,8 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 							href={`/categories/${categorySlug}`}
 							class={`category flex flex-row items-center justify-between rounded-lg px-2 py-1.5 transition-all hover:bg-primary-lighten`}
 						>
-							<p class="line-clamp-1 text-foreground transition-all">{categoryData.name}</p>
-							<span class="rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary">
+							<p class='line-clamp-1 text-foreground transition-all'>{categoryData.name}</p>
+							<span class='rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary'>
 								{categoryData.articles.length}
 							</span>
 						</a>
@@ -113,8 +113,8 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 								href={`/categories/${additionalCategory[0]}`}
 								class={`category col-span-2 flex flex-row items-center justify-between rounded-lg px-2 py-1.5 transition-all hover:bg-primary-lighten md:col-span-3`}
 							>
-								<p class="line-clamp-1 text-foreground transition-all">{additionalCategory[1].name}</p>
-								<span class="rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary">
+								<p class='line-clamp-1 text-foreground transition-all'>{additionalCategory[1].name}</p>
+								<span class='rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary'>
 									{additionalCategory[1].articles.length}
 								</span>
 							</a>
@@ -122,11 +122,11 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 								class={`absolute bottom-0 flex h-11 w-full flex-row items-center justify-center bg-gradient-to-t from-card from-25% to-transparent backdrop-blur-sm`}
 							>
 								<a
-									href="/categories/"
+									href='/categories/'
 									class={`flex flex-row items-center space-x-1 text-primary transition-colors hover:brightness-75 dark:hover:brightness-125`}
 								>
 									<span>もっとみる</span>
-									<Icon name="tabler:chevron-right" />
+									<Icon name='tabler:chevron-right' />
 								</a>
 							</div>
 						</>
@@ -140,17 +140,17 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 	{
 		tags.size > 0 && (
 			<div class={`rounded-3xl bg-card p-4 transition-all lg:hidden`}>
-				<div class="mb-2 flex flex-row items-center space-x-2 pl-1.5">
-					<span class="h-6 w-1 rounded-full bg-primary" />
-					<span class="text-xl font-semibold text-foreground">タグ</span>
+				<div class='mb-2 flex flex-row items-center space-x-2 pl-1.5'>
+					<span class='h-6 w-1 rounded-full bg-primary' />
+					<span class='text-xl font-semibold text-foreground'>タグ</span>
 				</div>
-				<div class="relative flex flex-row flex-wrap">
+				<div class='relative flex flex-row flex-wrap'>
 					{displayTags.map(([tagSlug, tagData]) => (
 						<a
 							href={`/tags/${tagSlug}`}
 							class={`tag m-1 rounded-md bg-primary-lighten px-2 py-1 transition-all hover:brightness-95`}
 						>
-							<p class="text-sm text-primary">{tagData.name}</p>
+							<p class='text-sm text-primary'>{tagData.name}</p>
 						</a>
 					))}
 					{shouldShowTagMore && (
@@ -158,11 +158,11 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 							class={`absolute bottom-0 flex h-10 w-full flex-row items-center justify-center bg-gradient-to-t from-card from-25% to-transparent backdrop-blur-sm`}
 						>
 							<a
-								href="/tags/"
+								href='/tags/'
 								class={`flex flex-row items-center space-x-1 text-primary transition-colors hover:brightness-75 dark:hover:brightness-125`}
 							>
 								<span>もっとみる</span>
-								<Icon name="tabler:chevron-right" />
+								<Icon name='tabler:chevron-right' />
 							</a>
 						</div>
 					)}
@@ -183,18 +183,18 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 			<div></div>
 			<div></div>
 		</div>
-		<div class="flex w-full flex-col items-center text-sm text-foreground-lighten">
+		<div class='flex w-full flex-col items-center text-sm text-foreground-lighten'>
 			<p>
 				© {new Date().getFullYear()}
-				<span class="copyright-name">
+				<span class='copyright-name'>
 					{siteConfig.copyrightName}
 				</span>
 				All Rights Reserved.
 			</p>
 			<p>
-				<a class="link" href={new URL('sitemap-index.xml', siteConfig.site)}>SiteMap</a> / <a
-					class="link"
-					href="/rss.xml">RSS</a
+				<a class='link' href={new URL('sitemap-index.xml', siteConfig.site)}>SiteMap</a> / <a
+					class='link'
+					href='/rss.xml'>RSS</a
 				>
 			</p>
 		</div>

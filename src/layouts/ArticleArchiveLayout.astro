@@ -16,7 +16,7 @@ const { archiveMap, title, subTitle, bannerImage, slug } = Astro.props
 ---
 
 <PageLayout title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug}>
-	<div class="archives">
+	<div class='archives'>
 		{
 			archiveMap.size !== 0 &&
 				[...archiveMap.keys()].map((year) => (

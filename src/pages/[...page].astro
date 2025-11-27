@@ -18,20 +18,20 @@ const { page } = Astro.props
 ---
 
 <PageLayout>
-	<div class="space-y-8">
-		<div class="w-full space-y-4">
+	<div class='space-y-8'>
+		<div class='w-full space-y-4'>
 			{
 				page.data.map((entry, index) => (
 					<ArticleCard
 						entry={entry}
-						class="onload-animation"
+						class='onload-animation'
 						style={`animation-delay: calc(var(--onload-animation-delay) + ${index + 1} * var(--onload-animation-interval))`}
 					/>
 				))
 			}
 		</div>
 		<Pagination
-			class="onload-animation"
+			class='onload-animation'
 			lastPage={page.lastPage}
 			currentPage={page.currentPage}
 			prevUrl={page.url.prev}

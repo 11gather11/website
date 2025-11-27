@@ -25,18 +25,13 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 		)
 	}
 
-	<div class="main-container my-10">
-		<div
-			class={`
-    flex flex-row items-start
-    xl:space-x-4
-  `}
-		>
-			<div class="side-bar">
+	<div class='main-container my-10'>
+		<div class='flex flex-row items-start xl:space-x-4'>
+			<div class='side-bar'>
 				<SideBar />
 			</div>
-			<div class="transition-leaving w-full space-y-8">
-				<main class="content onload-animation">
+			<div class='transition-leaving w-full space-y-8'>
+				<main class='content onload-animation'>
 					<slot />
 				</main>
 				<Footer />

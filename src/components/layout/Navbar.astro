@@ -10,7 +10,7 @@ import { siteConfig } from '@/config/site'
 const navCount = siteConfig.navigators.length
 ---
 
-<nav class="nav" id="nav">
+<nav class='nav' id='nav'>
 	<div
 		class={`
     relative flex h-[4rem] w-full items-center justify-between overflow-visible
@@ -24,28 +24,28 @@ const navCount = siteConfig.navigators.length
   `}
 		>
 			<button
-				id="menu-switcher"
-				type="button"
-				class="h-[40px] w-[44px] content-center"
-				aria-label="メニューを開く/閉じる"
+				id='menu-switcher'
+				type='button'
+				class='h-[40px] w-[44px] content-center'
+				aria-label='メニューを開く/閉じる'
 			>
 				<!-- 静的な3本線アイコン（初期表示用） -->
-				<Icon id="menu-icon-static" size={24} name="line-md:menu" class="mx-auto" />
+				<Icon id='menu-icon-static' size={24} name='line-md:menu' class='mx-auto' />
 				<!-- アニメーション付きアイコン（遷移時用） -->
-				<Icon id="menu-icon-closed" size={24} name="line-md:close-to-menu-transition" class="mx-auto hidden" />
-				<Icon id="menu-icon-opened" size={24} name="line-md:menu-to-close-transition" class="mx-auto hidden" />
+				<Icon id='menu-icon-closed' size={24} name='line-md:close-to-menu-transition' class='mx-auto hidden' />
+				<Icon id='menu-icon-opened' size={24} name='line-md:menu-to-close-transition' class='mx-auto hidden' />
 			</button>
-			<a class="title" href="/">
+			<a class='title' href='/'>
 				{siteConfig.brandTitle}
 			</a>
 		</div>
-		<a class="brand-lg" href="/">
-			<div class="title space-x-2">
-				<Icon name="line-md:home-md" size={32} />
+		<a class='brand-lg' href='/'>
+			<div class='title space-x-2'>
+				<Icon name='line-md:home-md' size={32} />
 				<p>{siteConfig.brandTitle}</p>
 			</div>
 		</a>
-		<div class="menu">
+		<div class='menu'>
 			{
 				siteConfig.navigators.map((nav) => (
 					<a href={nav.href}>
@@ -54,9 +54,9 @@ const navCount = siteConfig.navigators.length
 				))
 			}
 		</div>
-		<div class="toolbar">
-			<div class="lg:hidden">
-				<MobileSearchBar client:only="svelte" />
+		<div class='toolbar'>
+			<div class='lg:hidden'>
+				<MobileSearchBar client:only='svelte' />
 			</div>
 			<div
 				class={`
@@ -64,33 +64,33 @@ const navCount = siteConfig.navigators.length
      lg:block
    `}
 			>
-				<SearchBar client:only="svelte" />
+				<SearchBar client:only='svelte' />
 			</div>
-			<div class="theme">
-				<button type="button" id="theme-switcher" aria-label="テーマを切り替える">
+			<div class='theme'>
+				<button type='button' id='theme-switcher' aria-label='テーマを切り替える'>
 					<!-- 静的アイコン（初期表示用） -->
-					<Icon id="theme-icon-static-light" name="line-md:sunny-outline-loop" size={24} class="hidden" />
-					<Icon id="theme-icon-static-dark" name="line-md:moon-alt-loop" size={24} class="hidden" />
+					<Icon id='theme-icon-static-light' name='line-md:sunny-outline-loop' size={24} class='hidden' />
+					<Icon id='theme-icon-static-dark' name='line-md:moon-alt-loop' size={24} class='hidden' />
 					<!-- アニメーション付きアイコン（遷移時用） -->
 					<Icon
-						id="theme-icon-light"
-						name="line-md:moon-alt-to-sunny-outline-loop-transition"
+						id='theme-icon-light'
+						name='line-md:moon-alt-to-sunny-outline-loop-transition'
 						size={24}
-						class="hidden"
+						class='hidden'
 					/>
 					<Icon
-						id="theme-icon-dark"
-						name="line-md:sunny-outline-to-moon-alt-loop-transition"
+						id='theme-icon-dark'
+						name='line-md:sunny-outline-to-moon-alt-loop-transition'
 						size={24}
-						class="hidden"
+						class='hidden'
 					/>
 				</button>
 			</div>
 		</div>
 	</div>
-	<div id="mobile-menu" class="px-3 transition-all">
+	<div id='mobile-menu' class='px-3 transition-all'>
 		<ul
-			id="mobile-menu-nav"
+			id='mobile-menu-nav'
 			class={`
      mobile-menu-nav mobile-menu-nav-closed text-foreground flex flex-col
      space-y-6 overflow-hidden text-xl font-medium transition-all duration-300
@@ -98,13 +98,13 @@ const navCount = siteConfig.navigators.length
 		>
 			{
 				siteConfig.navigators.map((nav) => (
-					<li class="mt-1">
-						<a href={nav.href} class="mobile-nav-item">
-							<div class="flex flex-row items-center space-x-2">
-								<span class="text-primary">·</span>
+					<li class='mt-1'>
+						<a href={nav.href} class='mobile-nav-item'>
+							<div class='flex flex-row items-center space-x-2'>
+								<span class='text-primary'>·</span>
 								<span>{nav.name}</span>
 							</div>
-							<Icon name="tabler:chevron-right" class="text-foreground-lighten" />
+							<Icon name='tabler:chevron-right' class='text-foreground-lighten' />
 						</a>
 					</li>
 				))

@@ -57,34 +57,34 @@ const getPageUrl = (pageNumber: number): string => {
 }
 ---
 
-<nav class:list={[className, 'flex flex-row justify-center space-x-4']} style={style} aria-label="ページネーション">
+<nav class:list={[className, 'flex flex-row justify-center space-x-4']} style={style} aria-label='ページネーション'>
 	<!-- 前のページボタン -->
 	{
 		prevUrl ? (
-			<a href={prevUrl} class="button" aria-label="前のページ">
+			<a href={prevUrl} class='button' aria-label='前のページ'>
 				<span>＜</span>
 			</a>
 		) : (
-			<span class="button-disabled" aria-label="前のページはありません" role="button" aria-disabled="true">
+			<span class='button-disabled' aria-label='前のページはありません' role='button' aria-disabled='true'>
 				<span>＜</span>
 			</span>
 		)
 	}
 
 	<!-- ページ番号リスト -->
-	<div class="flex flex-row space-x-2" role="group" aria-label="ページ番号">
+	<div class='flex flex-row space-x-2' role='group' aria-label='ページ番号'>
 		{
 			pages.map((page) =>
 				page === '...' ? (
-					<span class="text-md flex h-10 w-10 items-center justify-center text-primary" aria-hidden="true">
+					<span class='text-md flex h-10 w-10 items-center justify-center text-primary' aria-hidden='true'>
 						...
 					</span>
 				) : page === currentPage ? (
-					<span class="button-selected" aria-current="page" aria-label={`現在のページ ${page}`} role="button">
+					<span class='button-selected' aria-current='page' aria-label={`現在のページ ${page}`} role='button'>
 						<span>{page}</span>
 					</span>
 				) : (
-					<a href={getPageUrl(page)} class="button" aria-label={`ページ ${page} に移動`}>
+					<a href={getPageUrl(page)} class='button' aria-label={`ページ ${page} に移動`}>
 						<span>{page}</span>
 					</a>
 				)
@@ -95,11 +95,11 @@ const getPageUrl = (pageNumber: number): string => {
 	<!-- 次のページボタン -->
 	{
 		nextUrl ? (
-			<a href={nextUrl} class="button" aria-label="次のページ">
+			<a href={nextUrl} class='button' aria-label='次のページ'>
 				<span>＞</span>
 			</a>
 		) : (
-			<span class="button-disabled" aria-label="次のページはありません" role="button" aria-disabled="true">
+			<span class='button-disabled' aria-label='次のページはありません' role='button' aria-disabled='true'>
 				<span>＞</span>
 			</span>
 		)
