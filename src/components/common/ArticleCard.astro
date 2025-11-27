@@ -5,7 +5,6 @@ import { Icon } from 'astro-icon/components'
 
 import { getCoverImageByID } from '@/utils/cover'
 import { formatDate } from '@/utils/date'
-import { idToSlug } from '@/utils/hash'
 
 interface Props {
 	class?: string
@@ -16,7 +15,7 @@ interface Props {
 const { entry, class: className, style } = Astro.props
 
 // 基本データの準備
-const entryID = idToSlug(entry.id)
+const entryID = entry.id
 const contentUrl = `/articles/${entryID}`
 const { title, image, description, published, category, tags } = entry.data
 
@@ -30,7 +29,7 @@ const excerpt = description || remarkPluginFrontmatter.excerpt
 const coverImageUrl = image ?? getCoverImageByID(entryID)
 
 // カテゴリスラグの事前計算
-const categorySlug = category ? idToSlug(category) : null
+const categorySlug = category ? category : null
 ---
 
 <div class:list={[className, `mx-3 flex flex-col rounded-3xl bg-card lg:mx-0 lg:h-[212px]`]} style={style}>
@@ -57,11 +56,7 @@ const categorySlug = category ? idToSlug(category) : null
 			<div class="mx-2 flex flex-row justify-between">
 				<!-- 公開日 -->
 				<div
-					class={`
-       dark:text-foreground
-       text-primary-lighten flex flex-row items-center space-x-2 rounded-md
-       bg-black/50 px-1.5 py-0.5
-     `}
+					class={`dark:text-foreground text-primary-lighten flex flex-row items-center space-x-2 rounded-md bg-black/50 px-1.5 py-0.5`}
 				>
 					<Icon name="tabler:calendar-week" />
 					<span class="select-none">
@@ -178,7 +173,7 @@ const categorySlug = category ? idToSlug(category) : null
 												{index > 0 && <span class="pr-1 text-sm">/</span>}
 												<a
 													class={`rounded-md px-1.5 py-0.5 text-sm transition-all hover:bg-primary-lighten hover:text-primary`}
-													href={`/tags/${idToSlug(tag)}`}
+													href={`/tags/${tag}`}
 													aria-label={`タグ「${tag}」の記事一覧`}
 												>
 													{tag}

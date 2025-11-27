@@ -1,6 +1,4 @@
-import type { SiteConfig } from '@/types/site'
-
-export const siteConfig: SiteConfig = {
+export const siteConfig = {
 	title: 'ggggg',
 	subtitle: '11gather11 Official Blog site',
 	brandTitle: 'gggg',
@@ -78,10 +76,7 @@ export const siteConfig: SiteConfig = {
 		'/images/banner.png',
 	],
 
-	slugMode: 'HASH',
-	slugLength: 16,
-
 	bannerStyle: 'LOOP',
 
 	pageSize: 8,
-}
+} as const

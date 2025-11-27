@@ -4,13 +4,12 @@ import { render } from 'astro:content'
 
 import ArticleLayout from '@/layouts/ArticleLayout.astro'
 import { getSortedArticles } from '@/utils/articles'
-import { idToSlug } from '@/utils/hash'
 
 export const getStaticPaths = (async () => {
 	const articleEntries = await getSortedArticles()
 	return articleEntries.map((entry) => ({
 		params: {
-			slug: idToSlug(entry.id),
+			slug: entry.id,
 		},
 		props: { entry },
 	}))
