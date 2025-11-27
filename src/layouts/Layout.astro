@@ -1,11 +1,11 @@
 ---
 import '@/styles/globals.css'
 
-import BaseHead from '@/components/common/BaseHead.astro'
 import BasicScripts from '@/components/common/BasicScripts.astro'
 import CommonMeta from '@/components/common/CommonMeta.astro'
 import Favicons from '@/components/common/Favicons.astro'
-import { siteConfig } from '@/config/site'
+import Metadata from '@/components/common/Metadata.astro'
+import { I18N } from '@/config.ts'
 
 interface Props {
 	title?: string
@@ -15,11 +15,11 @@ const { title } = Astro.props
 ---
 
 <!doctype html>
-<html lang={siteConfig.lang}>
+<html lang={I18N.lang} dir={I18N.dir}>
 	<head>
 		<CommonMeta />
 		<Favicons />
-		<BaseHead title={title} />
+		<Metadata title={title} />
 	</head>
 	<body class="bg-background tracking-tight text-foreground antialiased">
 		<slot />
