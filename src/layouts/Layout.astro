@@ -4,6 +4,7 @@ import '@/styles/globals.css'
 import BaseHead from '@/components/common/BaseHead.astro'
 import BasicScripts from '@/components/common/BasicScripts.astro'
 import CommonMeta from '@/components/common/CommonMeta.astro'
+import Favicons from '@/components/common/Favicons.astro'
 import { siteConfig } from '@/config/site'
 
 interface Props {
@@ -17,6 +18,7 @@ const { title } = Astro.props
 <html lang={siteConfig.lang}>
 	<head>
 		<CommonMeta />
+		<Favicons />
 		<BaseHead title={title} />
 	</head>
 	<body class="overflow-y-hidden">
@@ -25,11 +27,3 @@ const { title } = Astro.props
 		<BasicScripts />
 	</body>
 </html>
-
-<style>
-	@reference '../styles/globals.css';
-
-	body {
-		@apply bg-background;
-	}
-</style>

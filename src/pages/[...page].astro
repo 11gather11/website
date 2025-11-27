@@ -4,7 +4,7 @@ import type { GetStaticPaths } from 'astro'
 import ArticleCard from '@/components/common/ArticleCard.astro'
 import Pagination from '@/components/common/Pagination.astro'
 import { siteConfig } from '@/config/site'
-import MainLayout from '@/layouts/MainLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 import { getSortedArticles } from '@/utils/articles'
 
 export const getStaticPaths = (async ({ paginate }) => {
@@ -17,7 +17,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props
 ---
 
-<MainLayout>
+<PageLayout>
 	<div class="space-y-8">
 		<div class="w-full space-y-4">
 			{
@@ -39,4 +39,4 @@ const { page } = Astro.props
 			style={`animation-delay: calc(var(--onload-animation-delay) + ${page.data.length + 1} * var(--onload-animation-interval))`}
 		/>
 	</div>
-</MainLayout>
+</PageLayout>

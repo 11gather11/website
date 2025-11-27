@@ -2,7 +2,7 @@
 import { getEntry, render } from 'astro:content'
 
 import Markdown from '@/components/common/Markdown.astro'
-import MainLayout from '@/layouts/MainLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 
 const aboutArticle = await getEntry('specs', 'about')
 if (!aboutArticle) {
@@ -12,7 +12,7 @@ if (!aboutArticle) {
 const { Content } = await render(aboutArticle)
 ---
 
-<MainLayout>
+<PageLayout>
 	<div class="article-wrapper">
 		<div class="article">
 			<Markdown>
@@ -20,7 +20,7 @@ const { Content } = await render(aboutArticle)
 			</Markdown>
 		</div>
 	</div>
-</MainLayout>
+</PageLayout>
 
 <style>
 	@reference "../styles/globals.css";

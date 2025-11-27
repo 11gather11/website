@@ -1,7 +1,7 @@
 ---
 import ArchiveArticle from '@/components/common/ArchiveArticle.astro'
 import ArchiveYearTitle from '@/components/common/ArchiveYearTitle.astro'
-import MainLayout from '@/layouts/MainLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 import { type Archive } from '@/utils/articles'
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 const { archiveMap, title, subTitle, bannerImage, slug } = Astro.props
 ---
 
-<MainLayout title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug}>
+<PageLayout title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug}>
 	<div class="archives">
 		{
 			archiveMap.size !== 0 &&
@@ -33,7 +33,7 @@ const { archiveMap, title, subTitle, bannerImage, slug } = Astro.props
 				))
 		}
 	</div>
-</MainLayout>
+</PageLayout>
 
 <style>
 	@reference '../styles/globals.css';

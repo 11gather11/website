@@ -110,3 +110,9 @@
 	height: 5px;
 	background-color: var(--primary);
 }
+
+@layer base {
+	body {
+		@apply bg-background text-foreground;
+	}
+}
