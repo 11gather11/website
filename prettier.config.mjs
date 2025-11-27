@@ -9,6 +9,8 @@ export default {
 	trailingComma: 'es5',
 	printWidth: 120,
 
+	plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+	tailwindStylesheet: './src/styles/globals.css',
 	overrides: [
 		{
 			files: '*.astro',
@@ -17,7 +19,4 @@ export default {
 			},
 		},
 	],
-
-	plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
-	tailwindStylesheet: 'src/styles/globals.css',
 }
