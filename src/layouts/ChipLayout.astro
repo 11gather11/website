@@ -1,0 +1,55 @@
+---
+// Component Imports
+import MainLayout from '@/layouts/MainLayout.astro'
+
+interface Props {
+	chips: {
+		name: string
+		slug?: string
+		subChip?: string
+	}[]
+	title?: string
+	subTitle?: string
+	bannerImage?: string
+	slug?: string
+}
+
+const { chips, title, subTitle, bannerImage, slug } = Astro.props
+---
+
+<MainLayout
+	title={title}
+	subTitle={subTitle}
+	bannerImage={bannerImage}
+	slug={slug}
+>
+	<div class='bg-card flex flex-col rounded-2xl p-6'>
+		<div class='grid grid-cols-1 gap-1 md:grid-cols-2 lg:grid-cols-3'>
+			{
+				chips.map((chip) => (
+					<a
+						href={chip.slug}
+						class='chip hover:bg-primary-lighten flex flex-row items-center justify-between rounded-lg px-4 py-2 transition-all select-none'
+					>
+						<p class='chip-name text-foreground truncate pl-0 text-lg transition-all'>
+							{chip.name}
+						</p>
+						{chip.subChip && (
+							<span class='text-primary bg-primary-lighten ml-2 rounded-md px-3 py-1'>
+								{chip.subChip}
+							</span>
+						)}
+					</a>
+				))
+			}
+		</div>
+	</div>
+</MainLayout>
+
+<style>
+	@reference '../styles/globals.css';
+
+	.chip:hover .chip-name {
+		@apply text-primary pl-2;
+	}
+</style>

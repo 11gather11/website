@@ -1,0 +1,318 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { render } from 'astro:content'
+import { Icon } from 'astro-icon/components'
+
+import { getCoverImageByID } from '@/utils/cover'
+import { formatDate } from '@/utils/date'
+import { idToSlug } from '@/utils/hash'
+
+interface Props {
+	class?: string
+	entry: CollectionEntry<'articles'>
+	style?: string
+}
+
+const { entry, class: className, style } = Astro.props
+
+// 基本データの準備
+const entryID = idToSlug(entry.id)
+const contentUrl = `/articles/${entryID}`
+const { title, image, description, published, category, tags } = entry.data
+
+// レンダリング情報の取得
+const { remarkPluginFrontmatter } = await render(entry)
+const words = `${remarkPluginFrontmatter.words} 文字`
+const minutes = `${remarkPluginFrontmatter.minutes} 分`
+const excerpt = description || remarkPluginFrontmatter.excerpt
+
+// カバー画像URLの決定
+const coverImageUrl = image ?? getCoverImageByID(entryID)
+
+// カテゴリスラグの事前計算
+const categorySlug = category ? idToSlug(category) : null
+---
+
+<div
+	class:list={[
+		className,
+		`
+    bg-card mx-3 flex flex-col rounded-3xl
+    lg:mx-0 lg:h-[212px]
+  `,
+	]}
+	style={style}
+>
+	<!-- モバイル用カバー画像 (lg:hidden) -->
+	<a
+		href={contentUrl}
+		class={`
+    relative h-[128px] transition-all
+    hover:brightness-75
+    lg:hidden
+  `}
+		aria-label={`記事「${title}」を読む`}
+	>
+		<img
+			class={`
+     lozad absolute top-0 left-0 h-full w-full rounded-t-3xl object-cover
+     lg:hidden
+   `}
+			data-src={coverImageUrl}
+			alt={`${title}のカバー画像`}
+		/>
+		<!-- モバイル用オーバーレイ情報 -->
+		<div class='absolute bottom-2 w-full'>
+			<div class='mx-2 flex flex-row justify-between'>
+				<!-- 公開日 -->
+				<div
+					class={`
+       dark:text-foreground
+       text-primary-lighten flex flex-row items-center space-x-2 rounded-md
+       bg-black/50 px-1.5 py-0.5
+     `}
+				>
+					<Icon name='tabler:calendar-week' />
+					<span class='select-none'>
+						{formatDate(published)}
+					</span>
+				</div>
+				<!-- カテゴリ -->
+				{
+					category && (
+						<div class={`
+        dark:text-foreground
+        text-primary-lighten flex flex-row items-center space-x-2 rounded-md
+        bg-black/50 px-1.5 py-0.5
+      `}>
+							<Icon name='tabler:folder' />
+							<span class='max-w-28 truncate select-none'>{category}</span>
+						</div>
+					)
+				}
+			</div>
+		</div>
+	</a>
+
+	<!-- メインコンテンツエリア -->
+	<div class={`
+   flex h-[128px] flex-row
+   lg:h-[212px]
+ `}>
+		<!-- 記事情報セクション -->
+		<div
+			class={`
+     flex w-full flex-col justify-between pt-3 pr-6 pb-5 pl-5
+     lg:w-[calc(var(--spacing-page-width-lg)-404px)] lg:py-7 lg:pr-0
+     xl:w-[calc(var(--spacing-page-width-xl)-676px)]
+   `}
+		>
+			<!-- タイトル -->
+			<div class='flex w-full flex-row items-center'>
+				<div
+					class={`
+       bg-primary mx-2 hidden h-6 w-1 translate-y-[1px] rounded-lg
+       lg:block
+     `}
+				>
+				</div>
+				<a
+					href={contentUrl}
+					class='title group'
+					aria-label={`記事「${title}」を読む`}
+				>
+					<p class='truncate'>{title}</p>
+					<Icon
+						name='tabler:chevron-right'
+						size={28}
+						class={`
+        text-primary transition-all
+        lg:inline lg:-translate-x-2 lg:translate-y-[0.07rem] lg:opacity-0
+        lg:group-hover:translate-x-0 lg:group-hover:opacity-100
+      `}
+					/>
+				</a>
+			</div>
+
+			<!-- デスクトップ用メタ情報 -->
+			<div class={`
+     ml-2 hidden
+     lg:block
+   `}>
+				<ul class='flex flex-row space-x-4'>
+					<!-- 公開日 -->
+					<li class='data space-x-2'>
+						<div class='info-icon'>
+							<Icon
+								name='tabler:calendar-week'
+								size={20}
+								class='text-primary'
+							/>
+						</div>
+						<span class='text-sm select-none'>
+							{formatDate(published)}
+						</span>
+					</li>
+
+					<!-- カテゴリ -->
+					{
+						category && categorySlug && (
+							<li class='data space-x-1.5'>
+								<div class='info-icon'>
+									<Icon name='tabler:folder' size={20} class='text-primary' />
+								</div>
+								<a
+									class={`
+           hover:text-primary hover:bg-primary-lighten
+           text-foreground-lighten rounded-md px-1.5 py-0.5 text-sm
+           transition-all select-none
+         `}
+									href={`/categories/${categorySlug}`}
+									aria-label={`カテゴリ「${category}」の記事一覧`}
+								>
+									{category}
+								</a>
+							</li>
+						)
+					}
+
+					<!-- タグ -->
+					<li
+						class={`
+        hidden items-center overflow-clip
+        md:block
+        lg:hidden
+        xl:block
+      `}
+					>
+						{
+							tags && tags.length > 0 && (
+								<div class='data space-x-2'>
+									<div class='info-icon'>
+										<Icon name='tabler:tag' size={20} class='text-primary' />
+									</div>
+									<ul class='flex flex-row items-center space-x-1'>
+										{tags.slice(0, 3).map((tag, index) => (
+											<li class={`
+             text-foreground-lighten flex flex-row items-center select-none
+           `}>
+												{index > 0 && <span class='pr-1 text-sm'>/</span>}
+												<a
+													class={`
+               hover:text-primary hover:bg-primary-lighten
+               rounded-md px-1.5 py-0.5 text-sm transition-all
+             `}
+													href={`/tags/${idToSlug(tag)}`}
+													aria-label={`タグ「${tag}」の記事一覧`}
+												>
+													{tag}
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+							)
+						}
+					</li>
+				</ul>
+			</div>
+
+			<!-- 記事の概要 -->
+			<div class='lg:ml-2'>
+				<p class='desc'>{excerpt}</p>
+			</div>
+
+			<!-- 読了時間情報 -->
+			<div>
+				<div class={`
+      select-none
+      lg:ml-2
+    `}>
+					<div class='reading-time'>
+						<span>{words}</span>
+						<span>|</span>
+						<span>{minutes}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- デスクトップ用カバー画像 -->
+		<div class='cover-container'>
+			<a
+				href={contentUrl}
+				class='cover-wrapper'
+				aria-label={`記事「${title}」を読む`}
+			>
+				<Icon class='right-icon' name='tabler:chevron-right' size={96} />
+				<img
+					class={`
+       lozad h-[212px] w-[404px] rounded-r-3xl object-cover select-none
+       dark:brightness-90
+     `}
+					data-src={coverImageUrl}
+					alt={`${title}のカバー画像`}
+				/>
+			</a>
+		</div>
+	</div>
+</div>
+
+<style>
+	@reference '../../styles/globals.css';
+
+	.title {
+		@apply text-foreground font-primary flex w-full flex-row items-center space-x-1 align-top text-xl font-semibold lg:text-2xl;
+		@apply hover:text-primary transition-all;
+	}
+
+	.data {
+		@apply font-primary flex flex-row items-center;
+	}
+
+	.data > span {
+		@apply text-foreground-lighten font-primary inline-block self-center truncate align-middle;
+	}
+
+	.desc {
+		@apply text-foreground font-primary line-clamp-1 text-sm;
+	}
+
+	.reading-time {
+		@apply text-foreground-lighten font-primary space-x-3 align-middle text-sm;
+	}
+
+	.cover-container {
+		@apply relative ml-2 hidden h-[212px] max-w-[404px] min-w-[404px] select-none lg:block;
+		clip-path: polygon(0 0%, 100% 0%, 100% 100%, 10% 100%);
+	}
+
+	.cover-wrapper {
+		@apply h-full w-full overflow-hidden rounded-r-3xl select-none;
+	}
+
+	.cover-wrapper::before {
+		@apply absolute left-0 h-full w-0 rounded-r-3xl bg-black opacity-50 select-none;
+		content: '';
+		z-index: 1;
+		transition: all 0.3s;
+	}
+
+	.cover-wrapper:hover::before {
+		@apply h-full w-full select-none;
+	}
+
+	.right-icon {
+		@apply absolute top-1/2 left-1/2 z-[10] -translate-x-1/2 -translate-y-1/2 text-white;
+		clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+		transition: all 0.3s;
+	}
+
+	.cover-wrapper:hover .right-icon {
+		clip-path: polygon(0 0, 100% 0%, 100% 100%, 0 100%);
+	}
+
+	.info-icon {
+		@apply dark:bg-card-lighten bg-primary-lighten flex flex-row items-center rounded-lg p-2;
+	}
+</style>

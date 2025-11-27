@@ -1,0 +1,174 @@
+---
+interface Props {
+	lastPage: number
+	currentPage: number
+	prevUrl?: string
+	nextUrl?: string
+	class?: string
+	style?: string
+	baseUrl?: string
+}
+
+const {
+	lastPage,
+	currentPage,
+	prevUrl,
+	nextUrl,
+	class: className,
+	style,
+	baseUrl = '',
+} = Astro.props
+
+// ページネーションの設定
+const maxVisiblePages = 4
+
+// ページ番号配列の生成
+type PageItem = number | '...'
+let pages: PageItem[] = []
+
+if (lastPage <= maxVisiblePages) {
+	// 総ページ数が少ない場合は全ページを表示
+	pages = Array.from({ length: lastPage }, (_, i) => i + 1)
+} else {
+	// 現在のページを中心とした範囲を計算
+	const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
+	const endPage = Math.min(lastPage, startPage + maxVisiblePages - 1)
+
+	// 最初のページと省略記号
+	if (startPage > 1) {
+		pages.push(1)
+	}
+	if (startPage > 2) {
+		pages.push('...')
+	}
+
+	// 中央のページ範囲
+	pages.push(
+		...Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
+	)
+
+	// 最後のページと省略記号
+	if (endPage < lastPage - 1) {
+		pages.push('...')
+	}
+	if (endPage < lastPage) {
+		pages.push(lastPage)
+	}
+}
+
+/**
+ * ページ番号からURLを生成
+ */
+const getPageUrl = (pageNumber: number): string => {
+	if (pageNumber === 1) {
+		return baseUrl || '/'
+	}
+	return baseUrl ? `${baseUrl}/${pageNumber}` : `/${pageNumber}`
+}
+---
+
+<nav
+	class:list={[className, 'flex flex-row justify-center space-x-4']}
+	style={style}
+	aria-label='ページネーション'
+>
+	<!-- 前のページボタン -->
+	{
+		prevUrl ? (
+			<a href={prevUrl} class='button' aria-label='前のページ'>
+				<span>＜</span>
+			</a>
+		) : (
+			<span
+				class='button-disabled'
+				aria-label='前のページはありません'
+				role='button'
+				aria-disabled='true'
+			>
+				<span>＜</span>
+			</span>
+		)
+	}
+
+	<!-- ページ番号リスト -->
+	<div class='flex flex-row space-x-2' role='group' aria-label='ページ番号'>
+		{
+			pages.map((page) =>
+				page === '...' ? (
+					<span
+						class='text-md text-primary flex h-10 w-10 items-center justify-center'
+						aria-hidden='true'
+					>
+						...
+					</span>
+				) : page === currentPage ? (
+					<span
+						class='button-selected'
+						aria-current='page'
+						aria-label={`現在のページ ${page}`}
+						role='button'
+					>
+						<span>{page}</span>
+					</span>
+				) : (
+					<a
+						href={getPageUrl(page)}
+						class='button'
+						aria-label={`ページ ${page} に移動`}
+					>
+						<span>{page}</span>
+					</a>
+				)
+			)
+		}
+	</div>
+
+	<!-- 次のページボタン -->
+	{
+		nextUrl ? (
+			<a href={nextUrl} class='button' aria-label='次のページ'>
+				<span>＞</span>
+			</a>
+		) : (
+			<span
+				class='button-disabled'
+				aria-label='次のページはありません'
+				role='button'
+				aria-disabled='true'
+			>
+				<span>＞</span>
+			</span>
+		)
+	}
+</nav>
+
+<style>
+	@reference '../../styles/globals.css';
+
+	.button {
+		@apply bg-card flex h-10 w-10 flex-row items-center justify-center rounded-lg p-1 transition-all hover:brightness-90;
+		@apply dark:bg-card-lighten dark:hover:brightness-125;
+	}
+
+	.button span {
+		@apply text-primary w-full text-center;
+	}
+
+	.button-disabled {
+		@apply flex h-10 w-10 cursor-not-allowed flex-row items-center justify-center rounded-lg bg-gray-200 p-1;
+		@apply dark:bg-card-lighten dark:brightness-50;
+	}
+
+	.button-disabled span {
+		@apply text-foreground w-full text-center opacity-50;
+	}
+
+	.button-selected {
+		@apply bg-primary flex h-10 w-10 cursor-default flex-row items-center justify-center rounded-lg p-1;
+	}
+
+	.button-selected span {
+		@apply text-card w-full text-center;
+		@apply dark:text-white/75;
+	}
+</style>

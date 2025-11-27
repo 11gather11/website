@@ -1,0 +1,503 @@
+---
+import 'astro-pagefind'
+
+import { Icon } from 'astro-icon/components'
+
+import MobileSearchBar from '@/components/common/MobileSearchBar.svelte'
+import SearchBar from '@/components/common/SearchBar.svelte'
+import { siteConfig } from '@/config/site'
+
+const navCount = siteConfig.navigators.length
+---
+
+<nav class='nav' id='nav'>
+	<div
+		class={`
+    relative flex h-[4rem] w-full items-center justify-between overflow-visible
+    lg:h-[4.5rem]
+  `}
+	>
+		<div class={`
+    brand
+    after:content-['']
+  `}>
+			<button
+				id='menu-switcher'
+				type='button'
+				class='h-[40px] w-[44px] content-center'
+				aria-label='メニューを開く/閉じる'
+			>
+				<!-- 静的な3本線アイコン（初期表示用） -->
+				<Icon
+					id='menu-icon-static'
+					size={24}
+					name='line-md:menu'
+					class='mx-auto'
+				/>
+				<!-- アニメーション付きアイコン（遷移時用） -->
+				<Icon
+					id='menu-icon-closed'
+					size={24}
+					name='line-md:close-to-menu-transition'
+					class='mx-auto hidden'
+				/>
+				<Icon
+					id='menu-icon-opened'
+					size={24}
+					name='line-md:menu-to-close-transition'
+					class='mx-auto hidden'
+				/>
+			</button>
+			<a class='title' href='/'>
+				{siteConfig.brandTitle}
+			</a>
+		</div>
+		<a class='brand-lg' href='/'>
+			<div class='title space-x-2'>
+				<Icon name='line-md:home-md' size={32} />
+				<p>{siteConfig.brandTitle}</p>
+			</div>
+		</a>
+		<div class='menu'>
+			{
+				siteConfig.navigators.map((nav) => (
+					<a href={nav.href}>
+						<p>{nav.name}</p>
+					</a>
+				))
+			}
+		</div>
+		<div class='toolbar'>
+			<div class='lg:hidden'>
+				<MobileSearchBar client:only='svelte' />
+			</div>
+			<div class={`
+     hidden
+     lg:block
+   `}>
+				<SearchBar client:only='svelte' />
+			</div>
+			<div class='theme'>
+				<button
+					type='button'
+					id='theme-switcher'
+					aria-label='テーマを切り替える'
+				>
+					<!-- 静的アイコン（初期表示用） -->
+					<Icon
+						id='theme-icon-static-light'
+						name='line-md:sunny-outline-loop'
+						size={24}
+						class='hidden'
+					/>
+					<Icon
+						id='theme-icon-static-dark'
+						name='line-md:moon-alt-loop'
+						size={24}
+						class='hidden'
+					/>
+					<!-- アニメーション付きアイコン（遷移時用） -->
+					<Icon
+						id='theme-icon-light'
+						name='line-md:moon-alt-to-sunny-outline-loop-transition'
+						size={24}
+						class='hidden'
+					/>
+					<Icon
+						id='theme-icon-dark'
+						name='line-md:sunny-outline-to-moon-alt-loop-transition'
+						size={24}
+						class='hidden'
+					/>
+				</button>
+			</div>
+		</div>
+	</div>
+	<div id='mobile-menu' class='px-3 transition-all'>
+		<ul
+			id='mobile-menu-nav'
+			class={`
+     mobile-menu-nav mobile-menu-nav-closed text-foreground flex flex-col
+     space-y-6 overflow-hidden text-xl font-medium transition-all duration-300
+   `}
+		>
+			{
+				siteConfig.navigators.map((nav) => (
+					<li class='mt-1'>
+						<a href={nav.href} class='mobile-nav-item'>
+							<div class='flex flex-row items-center space-x-2'>
+								<span class='text-primary'>·</span>
+								<span>{nav.name}</span>
+							</div>
+							<Icon
+								name='tabler:chevron-right'
+								class='text-foreground-lighten'
+							/>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</nav>
+
+<style define:vars={{ navCount }}>
+	@reference '../../styles/globals.css';
+
+	.nav {
+		@apply bg-card-transparent fixed left-1/2 z-10 flex w-full flex-col justify-end rounded-b-xl px-2.5 opacity-0 backdrop-blur-md transition-all select-none;
+		@apply lg:w-page-width-lg lg:rounded-b-2xl;
+		@apply xl:w-page-width-xl;
+		transform: translateX(-50%) translateY(-5rem);
+		animation: 300ms nav-onload-animation;
+		animation-fill-mode: forwards;
+	}
+
+	.brand {
+		@apply flex w-full flex-row items-center justify-between;
+		@apply lg:hidden;
+	}
+
+	.brand > .title {
+		@apply text-primary font-brand absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 truncate rounded-lg px-4 py-2 text-2xl font-medium transition-all;
+		@apply hover:bg-primary-hover;
+	}
+
+	.brand button {
+		@apply text-foreground mr-2 flex h-[44px] w-[44px] flex-row items-center rounded-lg transition-all;
+		@apply hover:text-primary hover:bg-primary-hover;
+	}
+
+	.brand .icon {
+		@apply w-full text-center text-2xl;
+	}
+
+	.brand-lg {
+		@apply hidden h-[3.25rem] rounded-lg px-5 font-medium transition-all;
+		@apply lg:block;
+		@apply hover:bg-primary-hover;
+		@apply active:scale-95;
+	}
+
+	.brand-lg > .title {
+		@apply text-primary font-brand flex h-full flex-row content-center items-center text-2xl;
+	}
+
+	.brand-lg .icon {
+		@apply mr-2 stroke-2 text-2xl;
+	}
+
+	.menu {
+		@apply text-foreground absolute left-1/2 hidden -translate-x-1/2 items-center justify-between space-x-1 text-lg opacity-85;
+		@apply lg:flex;
+	}
+
+	.menu a {
+		@apply flex h-[3.25rem] items-center rounded-lg px-6 transition-all;
+		@apply hover:text-primary hover:bg-primary-hover;
+		@apply active:scale-95;
+	}
+
+	.menu p {
+		@apply font-primary leading-normal font-medium;
+	}
+
+	.toolbar {
+		@apply flex flex-row items-center justify-end space-x-1 lg:mr-2;
+	}
+
+	.toolbar button {
+		@apply text-foreground flex w-11 justify-center rounded-lg py-2 transition-all;
+		@apply hover:text-primary hover:bg-primary-hover;
+	}
+
+	.toolbar .icon {
+		@apply stroke-2 text-xl;
+	}
+
+	.mobile-menu-nav-closed {
+		@apply h-0 opacity-0;
+	}
+
+	.mobile-menu-nav-opened {
+		@apply opacity-100;
+		height: calc(var(--navCount) * 52px);
+	}
+
+	.mobile-menu-nav li a {
+		@apply font-primary flex flex-row items-center justify-between;
+	}
+
+	@keyframes nav-onload-animation {
+		0% {
+			transform: translateY(-5rem) translateX(-50%);
+			opacity: 0;
+		}
+		100% {
+			transform: translateY(0) translateX(-50%);
+			opacity: 1;
+		}
+	}
+</style>
+
+<script>
+	/**
+	 * SVGアイコンを再初期化（クローンして置き換え）
+	 *
+	 * @param icon - 再初期化するSVG要素
+	 * @returns クローンされた新しいSVG要素
+	 */
+	const reinitializeIcon = (icon: SVGElement): SVGElement => {
+		const cloned = icon.cloneNode(true) as SVGElement
+		icon.parentNode?.replaceChild(cloned, icon)
+		return cloned
+	}
+
+	/**
+	 * DOM要素を安全に取得
+	 *
+	 * @param id - 要素のID
+	 * @param elementType - 期待する要素の型名（エラーメッセージ用）
+	 * @returns 見つかった要素
+	 * @throws 要素が見つからない場合はエラー
+	 */
+	const getElementSafely = <T extends Element>(
+		id: string,
+		elementType: string
+	): T => {
+		const element = document.getElementById(id) as T | null
+		if (!element) {
+			throw new Error(`${elementType} element with id "${id}" not found`)
+		}
+		return element
+	}
+
+	// DOM要素を安全に取得
+	const menuSwitcher = getElementSafely<HTMLButtonElement>(
+		'menu-switcher',
+		'Menu switcher'
+	)
+	const mobileMenuNav = getElementSafely<HTMLUListElement>(
+		'mobile-menu-nav',
+		'Mobile menu nav'
+	)
+	const mobileMenuNavItems = document.getElementsByClassName('mobile-nav-item')
+
+	// 静的アイコンとアニメーションアイコンを取得
+	const menuIconStatic = getElementSafely<SVGElement>(
+		'menu-icon-static',
+		'Menu icon static'
+	)
+	let menuIconClosed = getElementSafely<SVGElement>(
+		'menu-icon-closed',
+		'Menu icon closed'
+	)
+	let menuIconOpened = getElementSafely<SVGElement>(
+		'menu-icon-opened',
+		'Menu icon opened'
+	)
+
+	// メニューの状態管理
+	let isMenuOpen = false
+
+	/**
+	 * メニューの開閉状態を切り替え
+	 */
+	const switchMenuState = (): void => {
+		try {
+			if (isMenuOpen) {
+				// メニューを閉じる: バツ → 3本線
+				menuIconStatic.style.display = 'none'
+				menuIconOpened.style.display = 'none'
+				menuIconClosed.style.display = 'block'
+				menuIconClosed = reinitializeIcon(menuIconClosed)
+			} else {
+				// メニューを開く: 3本線 → バツ
+				menuIconStatic.style.display = 'none'
+				menuIconClosed.style.display = 'none'
+				menuIconOpened.style.display = 'block'
+				menuIconOpened = reinitializeIcon(menuIconOpened)
+			}
+
+			// メニューのCSSクラス切り替え
+			if (isMenuOpen) {
+				mobileMenuNav.classList.replace(
+					'mobile-menu-nav-opened',
+					'mobile-menu-nav-closed'
+				)
+			} else {
+				mobileMenuNav.classList.replace(
+					'mobile-menu-nav-closed',
+					'mobile-menu-nav-opened'
+				)
+			}
+
+			isMenuOpen = !isMenuOpen
+		} catch (error) {
+			console.error('メニュー状態の切り替えに失敗しました:', error)
+		}
+	}
+
+	/**
+	 * 外部クリックでメニューを閉じる
+	 */
+	const handleOutsideClick = (event: MouseEvent): void => {
+		const target = event.target as Node
+
+		if (
+			!menuSwitcher.contains(target) &&
+			!mobileMenuNav.contains(target) &&
+			isMenuOpen
+		) {
+			switchMenuState()
+		}
+	}
+
+	// イベントリスナーの設定
+	menuSwitcher.addEventListener('click', switchMenuState)
+
+	// モバイルメニュー項目のクリックイベント
+	Array.from(mobileMenuNavItems).forEach((item) => {
+		item.addEventListener('click', switchMenuState)
+	})
+
+	// 外部クリックイベント
+	document.addEventListener('click', handleOutsideClick)
+
+	// テーマ切り替え機能
+	const themeSwitcher = getElementSafely<HTMLButtonElement>(
+		'theme-switcher',
+		'Theme switcher'
+	)
+
+	// 静的アイコンとアニメーションアイコンを取得
+	const themeIconStaticLight = getElementSafely<SVGElement>(
+		'theme-icon-static-light',
+		'Theme icon static light'
+	)
+	const themeIconStaticDark = getElementSafely<SVGElement>(
+		'theme-icon-static-dark',
+		'Theme icon static dark'
+	)
+	let themeIconLight = getElementSafely<SVGElement>(
+		'theme-icon-light',
+		'Theme icon light'
+	)
+	let themeIconDark = getElementSafely<SVGElement>(
+		'theme-icon-dark',
+		'Theme icon dark'
+	)
+
+	// 現在のテーマを記録
+	let currentTheme = localStorage.getItem('theme') || 'light'
+
+	/**
+	 * テーマを設定（初期化用）
+	 *
+	 * @param theme - 設定するテーマ（'light' または 'dark'）
+	 */
+	const setTheme = (theme: string): void => {
+		try {
+			document.documentElement.setAttribute('data-theme', theme)
+			localStorage.setItem('theme', theme)
+			currentTheme = theme
+
+			// 静的アイコンの表示
+			themeIconStaticLight.style.display = theme === 'light' ? 'block' : 'none'
+			themeIconStaticDark.style.display = theme === 'dark' ? 'block' : 'none'
+
+			// アニメーションアイコンは非表示
+			themeIconLight.style.display = 'none'
+			themeIconDark.style.display = 'none'
+
+			// ダーククラスの切り替え
+			document.documentElement.classList.toggle('dark', theme === 'dark')
+		} catch (error) {
+			console.error('テーマの設定に失敗しました:', error)
+		}
+	}
+
+	/**
+	 * テーマを切り替え（アニメーション付き）
+	 */
+	const switchTheme = (): void => {
+		try {
+			const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
+			// 静的アイコンを非表示
+			themeIconStaticLight.style.display = 'none'
+			themeIconStaticDark.style.display = 'none'
+
+			// アニメーションアイコンを表示して再初期化
+			if (newTheme === 'dark') {
+				themeIconLight.style.display = 'none'
+				themeIconDark.style.display = 'block'
+				themeIconDark = reinitializeIcon(themeIconDark)
+			} else {
+				themeIconDark.style.display = 'none'
+				themeIconLight.style.display = 'block'
+				themeIconLight = reinitializeIcon(themeIconLight)
+			}
+
+			// テーマを更新
+			document.documentElement.setAttribute('data-theme', newTheme)
+			localStorage.setItem('theme', newTheme)
+			currentTheme = newTheme
+			document.documentElement.classList.toggle('dark', newTheme === 'dark')
+		} catch (error) {
+			console.error('テーマの切り替えに失敗しました:', error)
+		}
+	}
+
+	// テーマ切り替えイベント
+	themeSwitcher.addEventListener('click', switchTheme)
+
+	// 初期化処理 - 静的アイコンのみ表示
+	document.addEventListener('DOMContentLoaded', () => {
+		setTheme(currentTheme)
+		// 静的アイコンは setTheme で設定されるので、追加処理は不要
+	})
+
+	// スクロール時のナビバー折りたたみ
+	const navBarElement = getElementSafely<HTMLElement>('nav', 'Navigation bar')
+	const bannerElement = document.getElementById('banner')
+
+	if (bannerElement) {
+		const bannerHeight = bannerElement.offsetHeight - 50
+		let lastYPos = 0
+
+		const handleScroll = (): void => {
+			const currentYPos = window.scrollY
+
+			if (bannerHeight < currentYPos && currentYPos > lastYPos) {
+				navBarElement.style.top = '-72px'
+			} else {
+				navBarElement.style.top = '0'
+			}
+
+			lastYPos = currentYPos
+		}
+
+		window.addEventListener('scroll', handleScroll)
+	}
+</script>
+
+<script is:inline>
+	/**
+	 * Pagefindの初期化
+	 */
+	const loadPagefind = async () => {
+		try {
+			const pagefind = await import('/pagefind/pagefind.js')
+			await pagefind.options({
+				excerptLength: 20,
+			})
+			pagefind.init()
+			window.pagefind = pagefind
+			pagefind.search('')
+		} catch (error) {
+			console.error('Pagefindの読み込みに失敗しました:', error)
+		}
+	}
+	loadPagefind()
+</script>

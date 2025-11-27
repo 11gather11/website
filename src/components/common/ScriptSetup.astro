@@ -1,0 +1,145 @@
+---
+
+---
+
+<script>
+	import lozad from 'lozad'
+	import { OverlayScrollbars } from 'overlayscrollbars'
+
+	/**
+	 * 遅延読み込みの初期化
+	 * .lozadクラスを持つ画像に遅延読み込みを適用し、
+	 * 読み込み完了時に'loaded'クラスを追加
+	 */
+	const setupLozad = (): void => {
+		try {
+			const lozadElements = document.querySelectorAll('.lozad')
+
+			if (lozadElements.length === 0) {
+				return // 対象要素がない場合は早期リターン
+			}
+
+			const observer = lozad('.lozad', {
+				loaded: (element: Element) => {
+					element.classList.add('loaded')
+				},
+			})
+
+			observer.observe()
+		} catch (error) {
+			console.error('遅延読み込みの初期化に失敗しました:', error)
+		}
+	}
+
+	/**
+	 * カスタムスクロールバーの設定
+	 * body要素とコードブロックにカスタムスクロールバーを適用
+	 * 初期化後にbodyのoverflow-y-hiddenクラスを削除
+	 */
+	const setupScrollBar = (): void => {
+		try {
+			// メインbodyスクロールバーの設定（パフォーマンス向上のためrequestAnimationFrameを使用）
+			requestAnimationFrame(() => {
+				try {
+					OverlayScrollbars(
+						{
+							target: document.body,
+							cancel: { nativeScrollbarsOverlaid: true },
+						},
+						{
+							scrollbars: {
+								theme: 'scrollbar-base scrollbar-auto py-1',
+								autoHide: 'move',
+							},
+						}
+					)
+					document.body.classList.remove('overflow-y-hidden')
+				} catch (error) {
+					console.error('bodyスクロールバーの設定に失敗しました:', error)
+				}
+			})
+
+			// コードブロック用スクロールバーの設定
+			const codeBlocks = document.querySelectorAll('pre')
+
+			if (codeBlocks.length > 0) {
+				requestAnimationFrame(() => {
+					try {
+						codeBlocks.forEach((element) => {
+							OverlayScrollbars(element, {
+								scrollbars: {
+									theme: 'scrollbar-base scrollbar-dark px-2',
+									autoHide: 'leave',
+									autoHideDelay: 500,
+									autoHideSuspend: false,
+								},
+							})
+						})
+					} catch (error) {
+						console.error(
+							'コードブロックスクロールバーの設定に失敗しました:',
+							error
+						)
+					}
+				})
+			}
+		} catch (error) {
+			console.error('スクロールバーの設定に失敗しました:', error)
+		}
+	}
+
+	/**
+	 * メイン初期化関数
+	 * 全てのコンポーネント（遅延読み込み、スクロールバー）を初期化
+	 */
+	const setup = (): void => {
+		try {
+			setupLozad()
+			setupScrollBar()
+		} catch (error) {
+			console.error('初期化に失敗しました:', error)
+		}
+	}
+
+	/**
+	 * swupページ遷移ライブラリとの統合
+	 * ページ遷移時に再初期化を行う
+	 */
+	const setupSwupIntegration = (): void => {
+		try {
+			if (window.swup?.hooks) {
+				// swupが既に利用可能な場合
+				window.swup.hooks.on('content:replace', setup)
+			} else {
+				// swupの初期化を待つ
+				const handleSwupEnable = () => {
+					if (window.swup?.hooks) {
+						window.swup.hooks.on('content:replace', setup)
+					}
+				}
+
+				document.addEventListener('swup:enable', handleSwupEnable, {
+					once: true,
+				})
+			}
+		} catch (error) {
+			console.error('swup統合の設定に失敗しました:', error)
+		}
+	}
+
+	/**
+	 * DOM準備完了時の初期化
+	 */
+	const initializeWhenReady = (): void => {
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', setup, { once: true })
+		} else {
+			// DOMが既に読み込み済みの場合
+			setup()
+		}
+	}
+
+	// 初期化実行
+	initializeWhenReady()
+	setupSwupIntegration()
+</script>

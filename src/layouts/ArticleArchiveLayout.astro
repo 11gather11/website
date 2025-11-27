@@ -1,0 +1,56 @@
+---
+import ArchiveArticle from '@/components/common/ArchiveArticle.astro'
+import ArchiveYearTitle from '@/components/common/ArchiveYearTitle.astro'
+import MainLayout from '@/layouts/MainLayout.astro'
+import { type Archive } from '@/utils/articles'
+
+interface Props {
+	archiveMap: Map<number, Array<Archive>>
+	title?: string
+	subTitle?: string
+	bannerImage?: string
+	slug?: string
+}
+
+const { archiveMap, title, subTitle, bannerImage, slug } = Astro.props
+---
+
+<MainLayout
+	title={title}
+	subTitle={subTitle}
+	bannerImage={bannerImage}
+	slug={slug}
+>
+	<div class='archives'>
+		{
+			archiveMap.size !== 0 &&
+				[...archiveMap.keys()].map((year) => (
+					<div>
+						<ArchiveYearTitle
+							year={year}
+							count={archiveMap.get(year)!.length}
+						/>
+						<ul>
+							{archiveMap.get(year)?.map((entry) => (
+								<li>
+									<ArchiveArticle
+										id={entry.id}
+										title={entry.title}
+										published={entry.date}
+									/>
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+		}
+	</div>
+</MainLayout>
+
+<style>
+	@reference '../styles/globals.css';
+
+	.archives {
+		@apply bg-card mx-3 flex flex-col rounded-2xl px-10 py-5 lg:mx-0 lg:p-10;
+	}
+</style>
