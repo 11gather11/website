@@ -20,17 +20,8 @@ const { entry } = Astro.props
 const { Content } = await render(entry)
 ---
 
-<ArticleLayout
-	title={entry.data.title}
-	description={entry.data.description}
-	image={entry.data.image}
->
-	<div
-		class='hidden'
-		data-pagefind-body
-		data-pagefind-weight='10'
-		data-pagefind-meta='title'
-	>
+<ArticleLayout title={entry.data.title} description={entry.data.description} image={entry.data.image}>
+	<div class="hidden" data-pagefind-body data-pagefind-weight="10" data-pagefind-meta="title">
 		{entry.data.title}
 	</div>
 	<div data-pagefind-body>

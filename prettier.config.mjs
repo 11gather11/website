@@ -18,5 +18,6 @@ export default {
 		},
 	],
 
-	plugins: ['prettier-plugin-astro'],
+	plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
+	tailwindStylesheet: 'src/styles/globals.css',
 }

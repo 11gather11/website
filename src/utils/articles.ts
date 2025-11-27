@@ -13,9 +13,7 @@ import { idToSlug } from '@/utils/hash'
  * - 本番環境: 公開記事のみ表示（下書き除外）
  * - 各記事に nextSlug/nextTitle（新しい記事）、prevSlug/prevTitle（古い記事）を追加
  */
-export const getSortedArticles = async (): Promise<
-	CollectionEntry<'articles'>[]
-> => {
+export const getSortedArticles = async (): Promise<CollectionEntry<'articles'>[]> => {
 	// 環境に基づいて記事をフィルタリングして取得
 	const sortedArticles = (
 		await getCollection('articles', ({ data }) => {

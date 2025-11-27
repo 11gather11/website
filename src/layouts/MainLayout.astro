@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer.astro'
 import NavBar from '@/components/layout/Navbar.astro'
 import SideBar from '@/components/layout/SideBar.astro'
 import { siteConfig } from '@/config/site'
-import BaseLayout from '@/layouts/BaseLayout.astro'
+import Layout from '@/layouts/Layout.astro'
 
 interface Props {
 	title?: string
@@ -16,43 +16,40 @@ interface Props {
 const { title, subTitle, bannerImage, slug } = Astro.props
 ---
 
-<BaseLayout title={title}>
+<Layout title={title}>
 	<NavBar />
 
 	{
 		siteConfig.bannerStyle == 'LOOP' && (
-			<Banner
-				title={title}
-				subTitle={subTitle}
-				bannerImage={bannerImage}
-				slug={slug}
-			/>
+			<Banner title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug} />
 		)
 	}
 
-	<div class='main-container my-10'>
-		<div class={`
+	<div class="main-container my-10">
+		<div
+			class={`
     flex flex-row items-start
     xl:space-x-4
-  `}>
-			<div class='side-bar'>
+  `}
+		>
+			<div class="side-bar">
 				<SideBar />
 			</div>
-			<div class='transition-leaving w-full space-y-8'>
-				<main class='content onload-animation'>
+			<div class="transition-leaving w-full space-y-8">
+				<main class="content onload-animation">
 					<slot />
 				</main>
 				<Footer />
 			</div>
 		</div>
 	</div>
-</BaseLayout>
+</Layout>
 
 <style>
 	@reference "../styles/globals.css";
 
 	.main-container {
-		@apply lg:max-w-page-width-lg lg:min-w-page-width-lg xl:max-w-page-width-xl xl:min-w-page-width-xl w-full md:max-w-[80%] md:min-w-[80%];
+		@apply w-full md:max-w-[80%] md:min-w-[80%] lg:max-w-page-width-lg lg:min-w-page-width-lg xl:max-w-page-width-xl xl:min-w-page-width-xl;
 		@apply md:mx-auto;
 	}
 

@@ -2,7 +2,7 @@
 title: Markdown Tutorial
 published: 2025-09-20
 description: A simple example of a Markdown blog post.
-tags: [Markdown, Blogging,test1,test2,test3,test4]
+tags: [Markdown, Blogging, test1, test2, test3, test4]
 category: Examples
 draft: true
 ---
@@ -20,10 +20,9 @@ A markdown example shows how to write a markdown file. This document integrates 
       - [Setext](#setext)
 - [This is an H1](#this-is-an-h1)
   - [This is an H2](#this-is-an-h2)
-      - [atx](#atx)
+    - [atx](#atx)
 - [This is an H1](#this-is-an-h1-1)
-  - [This is an H2](#this-is-an-h2-1)
-          - [This is an H6](#this-is-an-h6)
+  - [This is an H2](#this-is-an-h2-1) - [This is an H6](#this-is-an-h6)
 - [This is an H1](#this-is-an-h1-2)
   - [This is an H2](#this-is-an-h2-2)
     - [This is an H3](#this-is-an-h3)
@@ -633,7 +632,7 @@ Preview:
 
 ---
 
-This is [an example](http://example.com/ "Title") inline link.
+This is [an example](http://example.com/ 'Title') inline link.
 
 [This link](http://example.net/) has no title attribute.
 
@@ -668,7 +667,7 @@ Preview:
 
 ---
 
-[id]: http://example.com/ "Optional Title Here"
+[id]: http://example.com/ 'Optional Title Here'
 
 This is [an example][id] reference-style link.
 
@@ -829,7 +828,7 @@ Preview:
 
 ![Alt text](https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp)
 
-![Alt text](https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp "Optional title")
+![Alt text](https://s2.loli.net/2024/08/20/5fszgXeOxmL3Wdv.webp 'Optional title')
 
 ---
 
@@ -852,7 +851,7 @@ Preview:
 
 ---
 
-[img id]: url/to/image "Optional title attribute"
+[img id]: url/to/image 'Optional title attribute'
 
 ![Alt text][img id]
 

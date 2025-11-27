@@ -25,8 +25,4 @@ const { articles, name: categoryName } = categoryData
 const archiveMap = groupArticlesByYear(articles)
 ---
 
-<ArticleArchiveLayout
-	archiveMap={archiveMap}
-	title={categoryName}
-	subTitle='カテゴリーの記事一覧'
-/>
+<ArticleArchiveLayout archiveMap={archiveMap} title={categoryName} subTitle="カテゴリーの記事一覧" />

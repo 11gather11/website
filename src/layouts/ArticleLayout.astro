@@ -12,8 +12,8 @@ const { title, description, image } = Astro.props
 ---
 
 <MainLayout title={title} subTitle={description} bannerImage={image}>
-	<div class='article-wrapper'>
-		<div class='article'>
+	<div class="article-wrapper">
+		<div class="article">
 			<Markdown>
 				<slot />
 			</Markdown>
@@ -25,9 +25,9 @@ const { title, description, image } = Astro.props
 	@reference '../styles/globals.css';
 
 	.article-wrapper {
-		@apply bg-card mx-3 rounded-2xl px-5 py-6 lg:mx-0 lg:px-10 lg:py-9;
+		@apply mx-3 rounded-2xl bg-card px-5 py-6 lg:mx-0 lg:px-10 lg:py-9;
 	}
 	.article {
-		@apply font-primary flex flex-col;
+		@apply flex flex-col font-primary;
 	}
 </style>

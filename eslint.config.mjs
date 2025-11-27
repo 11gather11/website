@@ -4,7 +4,6 @@ import astroParser from 'astro-eslint-parser'
 import { defineConfig } from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginAstro from 'eslint-plugin-astro'
-import tailwindcss from 'eslint-plugin-better-tailwindcss'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import globals from 'globals'
@@ -43,21 +42,6 @@ export default defineConfig([
 			parserOptions: {
 				parser: tsParser,
 				extraFileExtensions: ['.astro'],
-			},
-		},
-	},
-
-	{
-		plugins: {
-			'better-tailwindcss': tailwindcss,
-		},
-		rules: {
-			...tailwindcss.configs['recommended-warn'].rules,
-			...tailwindcss.configs['recommended-error'].rules,
-		},
-		settings: {
-			'better-tailwindcss': {
-				entryPoint: 'src/styles/global.css',
 			},
 		},
 	},

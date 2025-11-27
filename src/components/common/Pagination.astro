@@ -9,15 +9,7 @@ interface Props {
 	baseUrl?: string
 }
 
-const {
-	lastPage,
-	currentPage,
-	prevUrl,
-	nextUrl,
-	class: className,
-	style,
-	baseUrl = '',
-} = Astro.props
+const { lastPage, currentPage, prevUrl, nextUrl, class: className, style, baseUrl = '' } = Astro.props
 
 // ページネーションの設定
 const maxVisiblePages = 4
@@ -43,9 +35,7 @@ if (lastPage <= maxVisiblePages) {
 	}
 
 	// 中央のページ範囲
-	pages.push(
-		...Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
-	)
+	pages.push(...Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i))
 
 	// 最後のページと省略記号
 	if (endPage < lastPage - 1) {
@@ -67,55 +57,34 @@ const getPageUrl = (pageNumber: number): string => {
 }
 ---
 
-<nav
-	class:list={[className, 'flex flex-row justify-center space-x-4']}
-	style={style}
-	aria-label='ページネーション'
->
+<nav class:list={[className, 'flex flex-row justify-center space-x-4']} style={style} aria-label="ページネーション">
 	<!-- 前のページボタン -->
 	{
 		prevUrl ? (
-			<a href={prevUrl} class='button' aria-label='前のページ'>
+			<a href={prevUrl} class="button" aria-label="前のページ">
 				<span>＜</span>
 			</a>
 		) : (
-			<span
-				class='button-disabled'
-				aria-label='前のページはありません'
-				role='button'
-				aria-disabled='true'
-			>
+			<span class="button-disabled" aria-label="前のページはありません" role="button" aria-disabled="true">
 				<span>＜</span>
 			</span>
 		)
 	}
 
 	<!-- ページ番号リスト -->
-	<div class='flex flex-row space-x-2' role='group' aria-label='ページ番号'>
+	<div class="flex flex-row space-x-2" role="group" aria-label="ページ番号">
 		{
 			pages.map((page) =>
 				page === '...' ? (
-					<span
-						class='text-md text-primary flex h-10 w-10 items-center justify-center'
-						aria-hidden='true'
-					>
+					<span class="text-md flex h-10 w-10 items-center justify-center text-primary" aria-hidden="true">
 						...
 					</span>
 				) : page === currentPage ? (
-					<span
-						class='button-selected'
-						aria-current='page'
-						aria-label={`現在のページ ${page}`}
-						role='button'
-					>
+					<span class="button-selected" aria-current="page" aria-label={`現在のページ ${page}`} role="button">
 						<span>{page}</span>
 					</span>
 				) : (
-					<a
-						href={getPageUrl(page)}
-						class='button'
-						aria-label={`ページ ${page} に移動`}
-					>
+					<a href={getPageUrl(page)} class="button" aria-label={`ページ ${page} に移動`}>
 						<span>{page}</span>
 					</a>
 				)
@@ -126,16 +95,11 @@ const getPageUrl = (pageNumber: number): string => {
 	<!-- 次のページボタン -->
 	{
 		nextUrl ? (
-			<a href={nextUrl} class='button' aria-label='次のページ'>
+			<a href={nextUrl} class="button" aria-label="次のページ">
 				<span>＞</span>
 			</a>
 		) : (
-			<span
-				class='button-disabled'
-				aria-label='次のページはありません'
-				role='button'
-				aria-disabled='true'
-			>
+			<span class="button-disabled" aria-label="次のページはありません" role="button" aria-disabled="true">
 				<span>＞</span>
 			</span>
 		)
@@ -146,12 +110,12 @@ const getPageUrl = (pageNumber: number): string => {
 	@reference '../../styles/globals.css';
 
 	.button {
-		@apply bg-card flex h-10 w-10 flex-row items-center justify-center rounded-lg p-1 transition-all hover:brightness-90;
+		@apply flex h-10 w-10 flex-row items-center justify-center rounded-lg bg-card p-1 transition-all hover:brightness-90;
 		@apply dark:bg-card-lighten dark:hover:brightness-125;
 	}
 
 	.button span {
-		@apply text-primary w-full text-center;
+		@apply w-full text-center text-primary;
 	}
 
 	.button-disabled {
@@ -160,15 +124,15 @@ const getPageUrl = (pageNumber: number): string => {
 	}
 
 	.button-disabled span {
-		@apply text-foreground w-full text-center opacity-50;
+		@apply w-full text-center text-foreground opacity-50;
 	}
 
 	.button-selected {
-		@apply bg-primary flex h-10 w-10 cursor-default flex-row items-center justify-center rounded-lg p-1;
+		@apply flex h-10 w-10 cursor-default flex-row items-center justify-center rounded-lg bg-primary p-1;
 	}
 
 	.button-selected span {
-		@apply text-card w-full text-center;
+		@apply w-full text-center text-card;
 		@apply dark:text-white/75;
 	}
 </style>

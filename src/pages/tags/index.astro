@@ -2,9 +2,7 @@
 import ChipLayout from '@/layouts/ChipLayout.astro'
 import { getTags } from '@/utils/articles'
 
-const tags = [...(await getTags()).values()].sort(
-	(a, b) => b.articles.length - a.articles.length
-)
+const tags = [...(await getTags()).values()].sort((a, b) => b.articles.length - a.articles.length)
 const chips = tags.map((tag) => ({
 	name: tag.name,
 	slug: tag.slug,
@@ -12,4 +10,4 @@ const chips = tags.map((tag) => ({
 }))
 ---
 
-<ChipLayout chips={chips} title='タグ' />
+<ChipLayout chips={chips} title="タグ" />
