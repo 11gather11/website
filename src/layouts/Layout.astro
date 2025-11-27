@@ -1,10 +1,11 @@
 ---
 import CommonMeta from '@/components/common/CommonMeta.astro'
 import Favicons from '@/components/Favicons.astro'
+import { SITE } from '@/config.ts'
 ---
 
 <!doctype html>
-<html lang="ja" dir="ltr">
+<html lang={SITE.lang} dir={SITE.dir}>
 	<head>
 		<CommonMeta />
 		<Favicons />
