@@ -17,7 +17,9 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 ---
 
 <Layout title={title}>
-	<NavBar />
+	<slot name='header'>
+		<NavBar />
+	</slot>
 
 	{
 		siteConfig.bannerStyle == 'LOOP' && (
@@ -34,7 +36,9 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 				<main class='content onload-animation'>
 					<slot />
 				</main>
-				<Footer />
+				<slot name='footer'>
+					<Footer />
+				</slot>
 			</div>
 		</div>
 	</div>
