@@ -43,8 +43,10 @@
 	--font-code: 'JetBrains Mono', monospace;
 	--font-copyright: 'Poiret One', sans-serif;
 
-	--page-width-lg: 992px;
-	--page-width-xl: 1264px;
+	/* 5xlに変更する */
+	--page-width-lg: 1024px;
+	/* 7xlに変更する */
+	--page-width-xl: 1280px;
 	--banner-height: 55vh;
 
 	--font-title: var(--font-brand);
