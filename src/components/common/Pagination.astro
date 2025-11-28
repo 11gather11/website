@@ -61,12 +61,28 @@ const getPageUrl = (pageNumber: number): string => {
 	<!-- 前のページボタン -->
 	{
 		prevUrl ? (
-			<a href={prevUrl} class='button' aria-label='前のページ'>
-				<span>＜</span>
+			<a
+				href={prevUrl}
+				class={`
+					flex h-10 w-10 flex-row items-center justify-center rounded-lg bg-card p-1 transition-all
+					hover:brightness-90
+					dark:bg-card-lighten dark:hover:brightness-125
+				`}
+				aria-label='前のページ'
+			>
+				<span class='w-full text-center text-primary'>＜</span>
 			</a>
 		) : (
-			<span class='button-disabled' aria-label='前のページはありません' role='button' aria-disabled='true'>
-				<span>＜</span>
+			<span
+				class={`
+					flex h-10 w-10 cursor-not-allowed flex-row items-center justify-center rounded-lg bg-gray-200 p-1
+					dark:bg-card-lighten dark:brightness-50
+				`}
+				aria-label='前のページはありません'
+				role='button'
+				aria-disabled='true'
+			>
+				<span class='w-full text-center text-foreground opacity-50'>＜</span>
 			</span>
 		)
 	}
@@ -76,16 +92,36 @@ const getPageUrl = (pageNumber: number): string => {
 		{
 			pages.map((page) =>
 				page === '...' ? (
-					<span class='text-md flex h-10 w-10 items-center justify-center text-primary' aria-hidden='true'>
+					<span class='flex h-10 w-10 items-center justify-center text-base text-primary' aria-hidden='true'>
 						...
 					</span>
 				) : page === currentPage ? (
-					<span class='button-selected' aria-current='page' aria-label={`現在のページ ${page}`} role='button'>
-						<span>{page}</span>
+					<span
+						class='flex h-10 w-10 cursor-default flex-row items-center justify-center rounded-lg bg-primary p-1'
+						aria-current='page'
+						aria-label={`現在のページ ${page}`}
+						role='button'
+					>
+						<span
+							class={`
+								w-full text-center text-card
+								dark:text-white/75
+							`}
+						>
+							{page}
+						</span>
 					</span>
 				) : (
-					<a href={getPageUrl(page)} class='button' aria-label={`ページ ${page} に移動`}>
-						<span>{page}</span>
+					<a
+						href={getPageUrl(page)}
+						class={`
+							flex h-10 w-10 flex-row items-center justify-center rounded-lg bg-card p-1 transition-all
+							hover:brightness-90
+							dark:bg-card-lighten dark:hover:brightness-125
+						`}
+						aria-label={`ページ ${page} に移動`}
+					>
+						<span class='w-full text-center text-primary'>{page}</span>
 					</a>
 				)
 			)
@@ -95,44 +131,29 @@ const getPageUrl = (pageNumber: number): string => {
 	<!-- 次のページボタン -->
 	{
 		nextUrl ? (
-			<a href={nextUrl} class='button' aria-label='次のページ'>
-				<span>＞</span>
+			<a
+				href={nextUrl}
+				class={`
+					flex h-10 w-10 flex-row items-center justify-center rounded-lg bg-card p-1 transition-all
+					hover:brightness-90
+					dark:bg-card-lighten dark:hover:brightness-125
+				`}
+				aria-label='次のページ'
+			>
+				<span class='w-full text-center text-primary'>＞</span>
 			</a>
 		) : (
-			<span class='button-disabled' aria-label='次のページはありません' role='button' aria-disabled='true'>
-				<span>＞</span>
+			<span
+				class={`
+					flex h-10 w-10 cursor-not-allowed flex-row items-center justify-center rounded-lg bg-gray-200 p-1
+					dark:bg-card-lighten dark:brightness-50
+				`}
+				aria-label='次のページはありません'
+				role='button'
+				aria-disabled='true'
+			>
+				<span class='w-full text-center text-foreground opacity-50'>＞</span>
 			</span>
 		)
 	}
 </nav>
-
-<style>
-	@reference '../../styles/globals.css';
-
-	.button {
-		@apply flex h-10 w-10 flex-row items-center justify-center rounded-lg bg-card p-1 transition-all hover:brightness-90;
-		@apply dark:bg-card-lighten dark:hover:brightness-125;
-	}
-
-	.button span {
-		@apply w-full text-center text-primary;
-	}
-
-	.button-disabled {
-		@apply flex h-10 w-10 cursor-not-allowed flex-row items-center justify-center rounded-lg bg-gray-200 p-1;
-		@apply dark:bg-card-lighten dark:brightness-50;
-	}
-
-	.button-disabled span {
-		@apply w-full text-center text-foreground opacity-50;
-	}
-
-	.button-selected {
-		@apply flex h-10 w-10 cursor-default flex-row items-center justify-center rounded-lg bg-primary p-1;
-	}
-
-	.button-selected span {
-		@apply w-full text-center text-card;
-		@apply dark:text-white/75;
-	}
-</style>
