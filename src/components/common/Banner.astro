@@ -27,18 +27,42 @@ const displaySubtitle = subTitle ?? siteConfig.subtitle
 const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefined)
 ---
 
-<div id='banner' class='banner onload-animation-fade-in'>
-	<div class='transition-main banner-inner h-full w-full'>
+<div
+	id='banner'
+	class={`
+		relative h-[calc(var(--spacing-banner-height)*3/4)] onload-animation-fade-in opacity-100
+		lg:h-banner-height
+	`}
+>
+	<div class='banner-inner h-full w-full transition-main'>
 		<!-- カルーセル表示（画像が指定されていない場合） -->
 		{
 			!hasHeaderImg && (
-				<div class='carousel'>
+				<div
+					class={`
+						absolute top-0 left-0 -z-10 block h-[calc(var(--spacing-banner-height)*3/4)] w-full overflow-hidden bg-white
+						fill-mode-[forwards]
+						lg:h-banner-height
+					`}
+				>
+					<div
+						class={`
+							absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-['']
+							dark:bg-black/30
+						`}
+					/>
 					<ul id='carousel_images'>
 						{carouselImagesList.map((img, index) => (
 							<li
-								class='item lozad'
-								style={{ animationDelay: `${index * 6}s` }}
-								data-background-image={img}
+								class={`
+									absolute top-0 left-0 z-0 h-full w-full origin-center bg-cover bg-center bg-no-repeat opacity-0 backface-hidden
+									transform-3d
+								`}
+								style={{
+									animation: `carousel-animation ${carouselAnimationTime} linear infinite 0s`,
+									animationDelay: `${index * 6}s`,
+									backgroundImage: `url(${img})`,
+								}}
 								role='img'
 								aria-label={`バナー画像 ${index + 1}`}
 							/>
@@ -51,8 +75,19 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 		<!-- 静的画像表示（画像が指定されている場合） -->
 		{
 			hasHeaderImg && (
-				<div class='cover'>
-					<img class='item lozad' data-src={bannerImageUrl} alt={title ? `${title}のバナー画像` : 'バナー画像'} />
+				<div class='absolute top-0 left-0 z-0 block h-banner-height w-full overflow-hidden bg-white'>
+					<div
+						class={`
+							absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-['']
+							dark:bg-black/30
+						`}
+					/>
+					<img
+						class='h-full w-full object-cover'
+						src={bannerImageUrl}
+						alt={title ? `${title}のバナー画像` : 'バナー画像'}
+						loading='lazy'
+					/>
 				</div>
 			)
 		}
@@ -61,24 +96,56 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 		<div class='relative h-[95%] w-full'>
 			<div
 				class={`
-      absolute top-1/2 left-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2
-      lg:w-3/4
-    `}
+					absolute top-1/2 left-1/2 w-4/5 -translate-x-1/2 -translate-y-1/2
+					lg:w-3/4
+				`}
 			>
 				<div class='flex flex-col'>
-					<h1 class:list={[hasTitle ? 'title-normal' : 'title-index']} class='title'>
+					<h1
+						class={`
+							mt-8 text-center font-title font-bold text-title drop-shadow-lg
+							lg:mt-1
+							${
+								hasTitle
+									? `
+										mb-1 text-3xl
+										lg:text-5xl
+									`
+									: `
+										mb-0 text-6xl leading-20
+										lg:mb-1 lg:text-8xl
+									`
+							}
+						`}
+					>
 						{displayTitle}
 					</h1>
-					<h2 class='subtitle'>{displaySubtitle}</h2>
+					<h2
+						class={`
+							text-center font-subtitle text-xl text-subtitle drop-shadow-md
+							lg:text-3xl
+						`}
+					>
+						{displaySubtitle}
+					</h2>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 波のSVGアニメーション -->
-	<div class='waves' id='header-waves'>
+	<div
+		id='header-waves'
+		class={`
+			absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full
+			md:h-[15vh]
+		`}
+	>
 		<svg
-			class='waves'
+			class={`
+				absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full
+				md:h-[15vh]
+			`}
 			xmlns='http://www.w3.org/2000/svg'
 			xmlns:xlink='http://www.w3.org/1999/xlink'
 			viewBox='0 24 150 28'
@@ -88,28 +155,33 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 			aria-label='装飾的な波のアニメーション'
 		>
 			<defs>
-				<path id='gentle-wave' d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'> </path>
+				<path id='gentle-wave' d='M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z'></path>
 			</defs>
-			<g class='parallax'>
+			<g>
 				<use
 					xlink:href='#gentle-wave'
 					x='48'
 					y='0'
-					class='opacity-25'
+					class='wave-use fill-background opacity-25'
 					style={{ animationDelay: '-2s', animationDuration: '7s' }}></use>
 				<use
 					xlink:href='#gentle-wave'
 					x='48'
 					y='3'
-					class='opacity-50'
+					class='wave-use fill-background opacity-50'
 					style={{ animationDelay: '-3s', animationDuration: '10s' }}></use>
 				<use
 					xlink:href='#gentle-wave'
 					x='48'
 					y='5'
-					class='opacity-75'
+					class='wave-use fill-background opacity-75'
 					style={{ animationDelay: '-4s', animationDuration: '13s' }}></use>
-				<use xlink:href='#gentle-wave' x='48' y='7' style={{ animationDelay: '-5s', animationDuration: '20s' }}></use>
+				<use
+					xlink:href='#gentle-wave'
+					x='48'
+					y='7'
+					class='wave-use fill-background'
+					style={{ animationDelay: '-5s', animationDuration: '20s' }}></use>
 			</g>
 		</svg>
 	</div>
@@ -180,87 +252,3 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 	// DOM読み込み完了後に実行
 	document.addEventListener('DOMContentLoaded', createCarouselAnimation)
 </script>
-
-<style define:vars={{ carouselAnimationTime }}>
-	@reference '../../styles/globals.css';
-
-	.banner {
-		@apply relative h-[calc(var(--spacing-banner-height)*3/4)] opacity-100 lg:h-banner-height;
-	}
-
-	.carousel {
-		@apply absolute top-0 left-0 -z-10 block h-[calc(var(--spacing-banner-height)*3/4)] w-full overflow-hidden bg-white lg:h-banner-height;
-		animation-fill-mode: forwards;
-	}
-
-	.carousel::before {
-		@apply absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-[''];
-		@apply dark:bg-black/30;
-	}
-
-	.carousel .item {
-		@apply absolute top-0 left-0 z-0 h-full w-full origin-center bg-cover bg-center bg-no-repeat opacity-0;
-		animation: carousel-animation var(--carouselAnimationTime) linear infinite 0s;
-		backface-visibility: hidden;
-		transform-style: preserve-3d;
-	}
-
-	.cover {
-		@apply absolute top-0 left-0 z-0 block h-banner-height w-full overflow-hidden bg-white;
-	}
-
-	.cover::before {
-		@apply absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-[''];
-		@apply dark:bg-black/30;
-	}
-
-	.cover .item {
-		@apply h-full w-full object-cover;
-	}
-
-	.title {
-		@apply mt-8 text-center font-title font-bold text-title drop-shadow-lg lg:mt-1;
-	}
-
-	.title-index {
-		@apply mb-0 text-6xl leading-[5rem] lg:mb-1 lg:text-8xl;
-	}
-
-	.title-normal {
-		@apply mb-1 text-3xl lg:text-5xl;
-	}
-
-	.subtitle {
-		@apply text-center font-subtitle text-xl text-subtitle drop-shadow-md lg:text-3xl;
-	}
-
-	.waves {
-		@apply absolute -bottom-[1px] h-[10vh] max-h-[9.375rem] min-h-[3.125rem] w-full;
-		@apply md:h-[15vh];
-	}
-
-	.waves > .parallax use {
-		@apply fill-background;
-		animation: wave 25s cubic-bezier(0.5, 0.5, 0.45, 0.5) infinite;
-	}
-
-	@keyframes wave {
-		0% {
-			transform: translate3d(-90px, 0, 0);
-		}
-		100% {
-			transform: translate3d(85px, 0, 0);
-		}
-	}
-
-	@keyframes banner-onload-animation {
-		0% {
-			opacity: 0;
-			height: calc(var(--spacing-banner-height) + 4rem);
-		}
-		100% {
-			opacity: 1;
-			height: var(--spacing-banner-height);
-		}
-	}
-</style>
