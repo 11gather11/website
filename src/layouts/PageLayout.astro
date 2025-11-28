@@ -1,9 +1,9 @@
 ---
 import Banner from '@/components/common/Banner.astro'
-import Footer from '@/components/layout/Footer.astro'
-import MobileSidebar from '@/components/layout/MobileSidebar.astro'
-import NavBar from '@/components/layout/Navbar.astro'
-import SideBar from '@/components/layout/SideBar.astro'
+import Footer from '@/components/widgets/Footer.astro'
+import Header from '@/components/widgets/Header.astro'
+import MobileSidebar from '@/components/widgets/MobileSidebar.astro'
+import SideBar from '@/components/widgets/SideBar.astro'
 import { siteConfig } from '@/config/site'
 import Layout from '@/layouts/Layout.astro'
 
@@ -19,7 +19,7 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 
 <Layout title={title}>
 	<slot name='header'>
-		<NavBar />
+		<Header />
 	</slot>
 
 	{
