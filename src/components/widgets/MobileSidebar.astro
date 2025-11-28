@@ -26,19 +26,39 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay + 1
 const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryDisplay] : null
 ---
 
-<div class='mx-3 space-y-4 lg:hidden'>
+<div
+	class={`
+		mx-3 space-y-4
+		lg:hidden
+	`}
+>
 	<!-- オーナー情報カード -->
 	<div class='rounded-3xl bg-card transition-all'>
-		<div class='flex flex-row md:flex-col md:pt-4'>
-			<a href='/about' class='relative h-40 w-40 md:hidden'>
-				<img class='lozad absolute top-0 left-0 h-40 rounded-l-3xl' data-src={siteConfig.avatarUrl} alt='Avatar' />
-				<div class='absolute top-0 right-0 h-40 w-20 bg-gradient-to-l from-card'></div>
+		<div
+			class={`
+				flex flex-row
+				md:flex-col md:pt-4
+			`}
+		>
+			<a
+				href='/about'
+				class={`
+					relative h-40 w-40
+					md:hidden
+				`}
+			>
+				<img class='absolute top-0 left-0 h-40 rounded-l-3xl' src={siteConfig.avatarUrl} alt='Avatar' loading='lazy' />
+				<div class='absolute top-0 right-0 h-40 w-20 bg-linear-to-l from-card'></div>
 			</a>
 			<a
 				href='/about'
-				class='mx-auto hidden h-40 w-40 cursor-pointer rounded-3xl transition-all hover:brightness-75 md:block'
+				class={`
+					mx-auto hidden h-40 w-40 cursor-pointer rounded-3xl transition-all
+					hover:brightness-75
+					md:block
+				`}
 			>
-				<img class='lozad h-40 rounded-3xl' data-src={siteConfig.avatarUrl} alt='Avatar' />
+				<img class='h-40 rounded-3xl' src={siteConfig.avatarUrl} alt='Avatar' loading='lazy' />
 			</a>
 			<div class='flex grow flex-col justify-center space-y-4 p-4'>
 				<div class='flex flex-col items-center'>
@@ -75,13 +95,28 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 					<span class='h-6 w-1 rounded-full bg-primary' />
 					<span class='text-xl font-semibold text-foreground'>カテゴリー</span>
 				</div>
-				<div class='relative grid grid-cols-2 gap-1 md:grid-cols-3'>
+				<div
+					class={`
+						relative grid grid-cols-2 gap-1
+						md:grid-cols-3
+					`}
+				>
 					{displayCategories.map(([categorySlug, categoryData]) => (
 						<a
 							href={`/categories/${categorySlug}`}
-							class='category flex flex-row items-center justify-between rounded-lg px-2 py-1.5 transition-all hover:bg-primary-lighten'
+							class={`
+								group flex flex-row items-center justify-between rounded-lg px-2 py-1.5 font-primary transition-all
+								hover:bg-primary-lighten
+							`}
 						>
-							<p class='line-clamp-1 text-foreground transition-all'>{categoryData.name}</p>
+							<p
+								class={`
+									line-clamp-1 text-foreground transition-all
+									group-hover:pl-2 group-hover:text-primary
+								`}
+							>
+								{categoryData.name}
+							</p>
 							<span class='rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary'>
 								{categoryData.articles.length}
 							</span>
@@ -91,17 +126,37 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 						<>
 							<a
 								href={`/categories/${additionalCategory[0]}`}
-								class='category col-span-2 flex flex-row items-center justify-between rounded-lg px-2 py-1.5 transition-all hover:bg-primary-lighten md:col-span-3'
+								class={`
+									group col-span-2 flex flex-row items-center justify-between rounded-lg px-2 py-1.5 font-primary transition-all
+									hover:bg-primary-lighten
+									md:col-span-3
+								`}
 							>
-								<p class='line-clamp-1 text-foreground transition-all'>{additionalCategory[1].name}</p>
+								<p
+									class={`
+										line-clamp-1 text-foreground transition-all
+										group-hover:pl-2 group-hover:text-primary
+									`}
+								>
+									{additionalCategory[1].name}
+								</p>
 								<span class='rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary'>
 									{additionalCategory[1].articles.length}
 								</span>
 							</a>
-							<div class='absolute bottom-0 flex h-11 w-full flex-row items-center justify-center bg-gradient-to-t from-card from-25% to-transparent backdrop-blur-sm'>
+							<div
+								class={`
+									absolute bottom-0 flex h-11 w-full flex-row items-center justify-center bg-linear-to-t from-card from-25%
+									to-transparent backdrop-blur-sm
+								`}
+							>
 								<a
 									href='/categories/'
-									class='flex flex-row items-center space-x-1 text-primary transition-colors hover:brightness-75 dark:hover:brightness-125'
+									class={`
+										flex flex-row items-center space-x-1 text-primary transition-colors
+										hover:brightness-75
+										dark:hover:brightness-125
+									`}
 								>
 									<span>もっとみる</span>
 									<Icon name='tabler:chevron-right' />
@@ -126,16 +181,28 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 					{displayTags.map(([tagSlug, tagData]) => (
 						<a
 							href={`/tags/${tagSlug}`}
-							class='tag m-1 rounded-md bg-primary-lighten px-2 py-1 transition-all hover:brightness-95'
+							class={`
+								m-1 rounded-md bg-primary-lighten px-2 py-1 font-primary transition-all
+								hover:brightness-95
+							`}
 						>
 							<p class='text-sm text-primary'>{tagData.name}</p>
 						</a>
 					))}
 					{shouldShowTagMore && (
-						<div class='absolute bottom-0 flex h-10 w-full flex-row items-center justify-center bg-gradient-to-t from-card from-25% to-transparent backdrop-blur-sm'>
+						<div
+							class={`
+								absolute bottom-0 flex h-10 w-full flex-row items-center justify-center bg-linear-to-t from-card from-25%
+								to-transparent backdrop-blur-sm
+							`}
+						>
 							<a
 								href='/tags/'
-								class='flex flex-row items-center space-x-1 text-primary transition-colors hover:brightness-75 dark:hover:brightness-125'
+								class={`
+									flex flex-row items-center space-x-1 text-primary transition-colors
+									hover:brightness-75
+									dark:hover:brightness-125
+								`}
 							>
 								<span>もっとみる</span>
 								<Icon name='tabler:chevron-right' />
@@ -147,15 +214,3 @@ const additionalCategory = shouldShowCategoryMore ? categoryEntries[maxCategoryD
 		)
 	}
 </div>
-
-<style>
-	@reference '../../styles/globals.css';
-
-	.category {
-		@apply font-primary;
-	}
-
-	.category:hover > p {
-		@apply pl-2 text-primary;
-	}
-</style>
