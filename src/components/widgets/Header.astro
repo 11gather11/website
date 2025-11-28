@@ -10,64 +10,121 @@ import { siteConfig } from '@/config/site'
 const navCount = siteConfig.navigators.length
 ---
 
-<header class='header-bar' id='header-bar'>
+<header
+	id='header-bar'
+	class={`
+		fixed left-1/2 z-10 flex w-full header-onload flex-col justify-end rounded-b-xl bg-card-transparent px-2.5
+		backdrop-blur-md transition-all select-none
+		lg:w-page-width-lg lg:rounded-b-2xl
+		xl:w-page-width-xl
+	`}
+>
 	<div
 		class={`
-    relative flex h-[4rem] w-full items-center justify-between overflow-visible
-    lg:h-[4.5rem]
-  `}
+			relative flex h-16 w-full items-center justify-between overflow-visible
+			lg:h-18
+		`}
 	>
 		<!-- モバイル: ブランド + メニューボタン -->
 		<div
 			class={`
-    brand
-    after:content-['']
-  `}
+				flex w-full flex-row items-center justify-between
+				lg:hidden
+			`}
 		>
 			<button
 				id='menu-switcher'
 				type='button'
-				class='h-[40px] w-[44px] content-center'
+				class={`
+					mr-2 flex h-11 w-11 flex-row items-center rounded-lg text-foreground transition-all
+					hover:bg-primary-hover hover:text-primary
+				`}
 				aria-label='メニューを開く/閉じる'
 			>
 				<Icon id='menu-icon-static' size={24} name='line-md:menu' class='mx-auto' />
 				<Icon id='menu-icon-closed' size={24} name='line-md:close-to-menu-transition' class='mx-auto hidden' />
 				<Icon id='menu-icon-opened' size={24} name='line-md:menu-to-close-transition' class='mx-auto hidden' />
 			</button>
-			<a class='title' href='/'>
+			<a
+				href='/'
+				class={`
+					absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 truncate rounded-lg px-4 py-2 font-brand text-2xl
+					font-medium text-primary transition-all
+					hover:bg-primary-hover
+				`}
+			>
 				{siteConfig.brandTitle}
 			</a>
 		</div>
 
 		<!-- デスクトップ: ブランド -->
-		<a class='brand-lg' href='/'>
-			<div class='title space-x-2'>
+		<a
+			href='/'
+			class={`
+				hidden h-13 rounded-lg px-5 font-medium transition-all
+				hover:bg-primary-hover
+				active:scale-95
+				lg:block
+			`}
+		>
+			<div class='flex h-full flex-row content-center items-center space-x-2 font-brand text-2xl text-primary'>
 				<Icon name='line-md:home-md' size={32} />
 				<p>{siteConfig.brandTitle}</p>
 			</div>
 		</a>
 
 		<!-- デスクトップ: ナビゲーション -->
-		<nav class='menu' aria-label='メインナビゲーション'>
+		<nav
+			class={`
+				absolute left-1/2 hidden -translate-x-1/2 items-center justify-between space-x-1 text-lg text-foreground opacity-85
+				lg:flex
+			`}
+			aria-label='メインナビゲーション'
+		>
 			{
 				siteConfig.navigators.map((item) => (
-					<a href={item.href}>
-						<p>{item.name}</p>
+					<a
+						href={item.href}
+						class={`
+							flex h-13 items-center rounded-lg px-6 transition-all
+							hover:bg-primary-hover hover:text-primary
+							active:scale-95
+						`}
+					>
+						<p class='font-primary leading-normal font-medium'>{item.name}</p>
 					</a>
 				))
 			}
 		</nav>
 
 		<!-- ツールバー: 検索 + テーマ切り替え -->
-		<div class='toolbar'>
+		<div
+			class={`
+				flex flex-row items-center justify-end space-x-1
+				lg:mr-2
+			`}
+		>
 			<div class='lg:hidden'>
 				<MobileSearchBar client:only='svelte' />
 			</div>
-			<div class='hidden lg:block'>
+			<div
+				class={`
+					hidden
+					lg:block
+				`}
+			>
 				<SearchBar client:only='svelte' />
 			</div>
-			<div class='theme'>
-				<button type='button' id='theme-switcher' aria-label='テーマを切り替える'>
+			<div>
+				<button
+					type='button'
+					id='theme-switcher'
+					class={`
+						flex w-11 justify-center rounded-lg py-2 text-foreground transition-all
+						hover:bg-primary-hover hover:text-primary
+					`}
+					aria-label='テーマを切り替える'
+				>
 					<Icon id='theme-icon-static-light' name='line-md:sunny-outline-loop' size={24} class='hidden' />
 					<Icon id='theme-icon-static-dark' name='line-md:moon-alt-loop' size={24} class='hidden' />
 					<Icon
@@ -91,15 +148,16 @@ const navCount = siteConfig.navigators.length
 	<nav id='mobile-menu' class='px-3 transition-all' aria-label='モバイルナビゲーション'>
 		<ul
 			id='mobile-menu-nav'
+			data-nav-count={navCount}
 			class={`
-     mobile-menu-nav mobile-menu-nav-closed text-foreground flex flex-col
-     space-y-6 overflow-hidden text-xl font-medium transition-all duration-300
-   `}
+				flex h-0 flex-col space-y-6 overflow-hidden text-xl font-medium text-foreground opacity-0 transition-all
+				duration-300
+			`}
 		>
 			{
 				siteConfig.navigators.map((item) => (
 					<li class='mt-1'>
-						<a href={item.href} class='mobile-nav-item'>
+						<a href={item.href} data-mobile-nav-item class='flex flex-row items-center justify-between font-primary'>
 							<div class='flex flex-row items-center space-x-2'>
 								<span class='text-primary'>·</span>
 								<span>{item.name}</span>
@@ -112,105 +170,6 @@ const navCount = siteConfig.navigators.length
 		</ul>
 	</nav>
 </header>
-
-<style define:vars={{ navCount }}>
-	@reference '../../styles/globals.css';
-
-	.header-bar {
-		@apply fixed left-1/2 z-10 flex w-full flex-col justify-end rounded-b-xl bg-card-transparent px-2.5 opacity-0 backdrop-blur-md transition-all select-none;
-		@apply lg:w-page-width-lg lg:rounded-b-2xl;
-		@apply xl:w-page-width-xl;
-		transform: translateX(-50%) translateY(-5rem);
-		animation: 300ms header-onload-animation;
-		animation-fill-mode: forwards;
-	}
-
-	.brand {
-		@apply flex w-full flex-row items-center justify-between;
-		@apply lg:hidden;
-	}
-
-	.brand > .title {
-		@apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 truncate rounded-lg px-4 py-2 font-brand text-2xl font-medium text-primary transition-all;
-		@apply hover:bg-primary-hover;
-	}
-
-	.brand button {
-		@apply mr-2 flex h-[44px] w-[44px] flex-row items-center rounded-lg text-foreground transition-all;
-		@apply hover:bg-primary-hover hover:text-primary;
-	}
-
-	.brand .icon {
-		@apply w-full text-center text-2xl;
-	}
-
-	.brand-lg {
-		@apply hidden h-[3.25rem] rounded-lg px-5 font-medium transition-all;
-		@apply lg:block;
-		@apply hover:bg-primary-hover;
-		@apply active:scale-95;
-	}
-
-	.brand-lg > .title {
-		@apply flex h-full flex-row content-center items-center font-brand text-2xl text-primary;
-	}
-
-	.brand-lg .icon {
-		@apply mr-2 stroke-2 text-2xl;
-	}
-
-	.menu {
-		@apply absolute left-1/2 hidden -translate-x-1/2 items-center justify-between space-x-1 text-lg text-foreground opacity-85;
-		@apply lg:flex;
-	}
-
-	.menu a {
-		@apply flex h-[3.25rem] items-center rounded-lg px-6 transition-all;
-		@apply hover:bg-primary-hover hover:text-primary;
-		@apply active:scale-95;
-	}
-
-	.menu p {
-		@apply font-primary leading-normal font-medium;
-	}
-
-	.toolbar {
-		@apply flex flex-row items-center justify-end space-x-1 lg:mr-2;
-	}
-
-	.toolbar button {
-		@apply flex w-11 justify-center rounded-lg py-2 text-foreground transition-all;
-		@apply hover:bg-primary-hover hover:text-primary;
-	}
-
-	.toolbar .icon {
-		@apply stroke-2 text-xl;
-	}
-
-	.mobile-menu-nav-closed {
-		@apply h-0 opacity-0;
-	}
-
-	.mobile-menu-nav-opened {
-		@apply opacity-100;
-		height: calc(var(--navCount) * 52px);
-	}
-
-	.mobile-menu-nav li a {
-		@apply flex flex-row items-center justify-between font-primary;
-	}
-
-	@keyframes header-onload-animation {
-		0% {
-			transform: translateY(-5rem) translateX(-50%);
-			opacity: 0;
-		}
-		100% {
-			transform: translateY(0) translateX(-50%);
-			opacity: 1;
-		}
-	}
-</style>
 
 <script>
 	/**
@@ -244,7 +203,7 @@ const navCount = siteConfig.navigators.length
 	// DOM要素を安全に取得
 	const menuSwitcher = getElementSafely<HTMLButtonElement>('menu-switcher', 'Menu switcher')
 	const mobileMenuNav = getElementSafely<HTMLUListElement>('mobile-menu-nav', 'Mobile menu nav')
-	const mobileMenuNavItems = document.getElementsByClassName('mobile-nav-item')
+	const mobileMenuNavItems = document.querySelectorAll('[data-mobile-nav-item]')
 
 	// 静的アイコンとアニメーションアイコンを取得
 	const menuIconStatic = getElementSafely<SVGElement>('menu-icon-static', 'Menu icon static')
@@ -253,6 +212,7 @@ const navCount = siteConfig.navigators.length
 
 	// メニューの状態管理
 	let isMenuOpen = false
+	const navCount = Number(mobileMenuNav.dataset.navCount) || 0
 
 	/**
 	 * メニューの開閉状態を切り替え
@@ -273,11 +233,15 @@ const navCount = siteConfig.navigators.length
 				menuIconOpened = reinitializeIcon(menuIconOpened)
 			}
 
-			// メニューのCSSクラス切り替え
+			// メニューの開閉スタイル切り替え
 			if (isMenuOpen) {
-				mobileMenuNav.classList.replace('mobile-menu-nav-opened', 'mobile-menu-nav-closed')
+				// 閉じる
+				mobileMenuNav.style.height = '0'
+				mobileMenuNav.classList.add('opacity-0')
 			} else {
-				mobileMenuNav.classList.replace('mobile-menu-nav-closed', 'mobile-menu-nav-opened')
+				// 開く
+				mobileMenuNav.style.height = `${navCount * 52}px`
+				mobileMenuNav.classList.remove('opacity-0')
 			}
 
 			isMenuOpen = !isMenuOpen

@@ -47,3 +47,21 @@
 		transform: translate3d(85px, 0, 0);
 	}
 }
+
+@utility header-onload {
+	opacity: 0;
+	transform: translateX(-50%) translateY(-5rem);
+	animation: 300ms header-onload-animation forwards;
+}
+
+@keyframes header-onload-animation {
+	0% {
+		transform: translateY(-5rem) translateX(-50%);
+		opacity: 0;
+	}
+
+	100% {
+		transform: translateY(0) translateX(-50%);
+		opacity: 1;
+	}
+}
