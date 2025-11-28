@@ -10,120 +10,118 @@ import { siteConfig } from '@/config/site'
 const navCount = siteConfig.navigators.length
 ---
 
-<header>
-	<nav class='nav' id='nav'>
-		<div
-			class={`
+<header class='header-bar' id='header-bar'>
+	<div
+		class={`
     relative flex h-[4rem] w-full items-center justify-between overflow-visible
     lg:h-[4.5rem]
   `}
-		>
-			<div
-				class={`
+	>
+		<!-- モバイル: ブランド + メニューボタン -->
+		<div
+			class={`
     brand
     after:content-['']
   `}
+		>
+			<button
+				id='menu-switcher'
+				type='button'
+				class='h-[40px] w-[44px] content-center'
+				aria-label='メニューを開く/閉じる'
 			>
-				<button
-					id='menu-switcher'
-					type='button'
-					class='h-[40px] w-[44px] content-center'
-					aria-label='メニューを開く/閉じる'
-				>
-					<!-- 静的な3本線アイコン（初期表示用） -->
-					<Icon id='menu-icon-static' size={24} name='line-md:menu' class='mx-auto' />
-					<!-- アニメーション付きアイコン（遷移時用） -->
-					<Icon id='menu-icon-closed' size={24} name='line-md:close-to-menu-transition' class='mx-auto hidden' />
-					<Icon id='menu-icon-opened' size={24} name='line-md:menu-to-close-transition' class='mx-auto hidden' />
-				</button>
-				<a class='title' href='/'>
-					{siteConfig.brandTitle}
-				</a>
-			</div>
-			<a class='brand-lg' href='/'>
-				<div class='title space-x-2'>
-					<Icon name='line-md:home-md' size={32} />
-					<p>{siteConfig.brandTitle}</p>
-				</div>
+				<Icon id='menu-icon-static' size={24} name='line-md:menu' class='mx-auto' />
+				<Icon id='menu-icon-closed' size={24} name='line-md:close-to-menu-transition' class='mx-auto hidden' />
+				<Icon id='menu-icon-opened' size={24} name='line-md:menu-to-close-transition' class='mx-auto hidden' />
+			</button>
+			<a class='title' href='/'>
+				{siteConfig.brandTitle}
 			</a>
-			<div class='menu'>
-				{
-					siteConfig.navigators.map((nav) => (
-						<a href={nav.href}>
-							<p>{nav.name}</p>
-						</a>
-					))
-				}
+		</div>
+
+		<!-- デスクトップ: ブランド -->
+		<a class='brand-lg' href='/'>
+			<div class='title space-x-2'>
+				<Icon name='line-md:home-md' size={32} />
+				<p>{siteConfig.brandTitle}</p>
 			</div>
-			<div class='toolbar'>
-				<div class='lg:hidden'>
-					<MobileSearchBar client:only='svelte' />
-				</div>
-				<div
-					class={`
-     hidden
-     lg:block
-   `}
-				>
-					<SearchBar client:only='svelte' />
-				</div>
-				<div class='theme'>
-					<button type='button' id='theme-switcher' aria-label='テーマを切り替える'>
-						<!-- 静的アイコン（初期表示用） -->
-						<Icon id='theme-icon-static-light' name='line-md:sunny-outline-loop' size={24} class='hidden' />
-						<Icon id='theme-icon-static-dark' name='line-md:moon-alt-loop' size={24} class='hidden' />
-						<!-- アニメーション付きアイコン（遷移時用） -->
-						<Icon
-							id='theme-icon-light'
-							name='line-md:moon-alt-to-sunny-outline-loop-transition'
-							size={24}
-							class='hidden'
-						/>
-						<Icon
-							id='theme-icon-dark'
-							name='line-md:sunny-outline-to-moon-alt-loop-transition'
-							size={24}
-							class='hidden'
-						/>
-					</button>
-				</div>
+		</a>
+
+		<!-- デスクトップ: ナビゲーション -->
+		<nav class='menu' aria-label='メインナビゲーション'>
+			{
+				siteConfig.navigators.map((item) => (
+					<a href={item.href}>
+						<p>{item.name}</p>
+					</a>
+				))
+			}
+		</nav>
+
+		<!-- ツールバー: 検索 + テーマ切り替え -->
+		<div class='toolbar'>
+			<div class='lg:hidden'>
+				<MobileSearchBar client:only='svelte' />
+			</div>
+			<div class='hidden lg:block'>
+				<SearchBar client:only='svelte' />
+			</div>
+			<div class='theme'>
+				<button type='button' id='theme-switcher' aria-label='テーマを切り替える'>
+					<Icon id='theme-icon-static-light' name='line-md:sunny-outline-loop' size={24} class='hidden' />
+					<Icon id='theme-icon-static-dark' name='line-md:moon-alt-loop' size={24} class='hidden' />
+					<Icon
+						id='theme-icon-light'
+						name='line-md:moon-alt-to-sunny-outline-loop-transition'
+						size={24}
+						class='hidden'
+					/>
+					<Icon
+						id='theme-icon-dark'
+						name='line-md:sunny-outline-to-moon-alt-loop-transition'
+						size={24}
+						class='hidden'
+					/>
+				</button>
 			</div>
 		</div>
-		<div id='mobile-menu' class='px-3 transition-all'>
-			<ul
-				id='mobile-menu-nav'
-				class={`
+	</div>
+
+	<!-- モバイル: ナビゲーションメニュー -->
+	<nav id='mobile-menu' class='px-3 transition-all' aria-label='モバイルナビゲーション'>
+		<ul
+			id='mobile-menu-nav'
+			class={`
      mobile-menu-nav mobile-menu-nav-closed text-foreground flex flex-col
      space-y-6 overflow-hidden text-xl font-medium transition-all duration-300
    `}
-			>
-				{
-					siteConfig.navigators.map((nav) => (
-						<li class='mt-1'>
-							<a href={nav.href} class='mobile-nav-item'>
-								<div class='flex flex-row items-center space-x-2'>
-									<span class='text-primary'>·</span>
-									<span>{nav.name}</span>
-								</div>
-								<Icon name='tabler:chevron-right' class='text-foreground-lighten' />
-							</a>
-						</li>
-					))
-				}
-			</ul>
-		</div>
+		>
+			{
+				siteConfig.navigators.map((item) => (
+					<li class='mt-1'>
+						<a href={item.href} class='mobile-nav-item'>
+							<div class='flex flex-row items-center space-x-2'>
+								<span class='text-primary'>·</span>
+								<span>{item.name}</span>
+							</div>
+							<Icon name='tabler:chevron-right' class='text-foreground-lighten' />
+						</a>
+					</li>
+				))
+			}
+		</ul>
 	</nav>
 </header>
 
 <style define:vars={{ navCount }}>
 	@reference '../../styles/globals.css';
 
-	.nav {
+	.header-bar {
 		@apply fixed left-1/2 z-10 flex w-full flex-col justify-end rounded-b-xl bg-card-transparent px-2.5 opacity-0 backdrop-blur-md transition-all select-none;
 		@apply lg:w-page-width-lg lg:rounded-b-2xl;
 		@apply xl:w-page-width-xl;
 		transform: translateX(-50%) translateY(-5rem);
-		animation: 300ms nav-onload-animation;
+		animation: 300ms header-onload-animation;
 		animation-fill-mode: forwards;
 	}
 
@@ -202,7 +200,7 @@ const navCount = siteConfig.navigators.length
 		@apply flex flex-row items-center justify-between font-primary;
 	}
 
-	@keyframes nav-onload-animation {
+	@keyframes header-onload-animation {
 		0% {
 			transform: translateY(-5rem) translateX(-50%);
 			opacity: 0;
@@ -389,8 +387,8 @@ const navCount = siteConfig.navigators.length
 		// 静的アイコンは setTheme で設定されるので、追加処理は不要
 	})
 
-	// スクロール時のナビバー折りたたみ
-	const navBarElement = getElementSafely<HTMLElement>('nav', 'Navigation bar')
+	// スクロール時のヘッダー折りたたみ
+	const headerElement = getElementSafely<HTMLElement>('header-bar', 'Header bar')
 	const bannerElement = document.getElementById('banner')
 
 	if (bannerElement) {
@@ -401,9 +399,9 @@ const navCount = siteConfig.navigators.length
 			const currentYPos = window.scrollY
 
 			if (bannerHeight < currentYPos && currentYPos > lastYPos) {
-				navBarElement.style.top = '-72px'
+				headerElement.style.top = '-72px'
 			} else {
-				navBarElement.style.top = '0'
+				headerElement.style.top = '0'
 			}
 
 			lastYPos = currentYPos
