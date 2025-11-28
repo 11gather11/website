@@ -3,8 +3,9 @@ title: Markdown Tutorial
 published: 2025-09-20
 description: A simple example of a Markdown blog post.
 tags: [Markdown, Blogging, test1, test2, test3, test4]
-category: Examples
+category: test
 draft: true
+image: https://t4.ftcdn.net/jpg/02/20/89/49/360_F_220894919_dHe2SOXAdnjI4nt8td3ot4ZhmEmE6WRa.jpg
 ---
 
 # Markdown Tutorial

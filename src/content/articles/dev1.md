@@ -5,6 +5,7 @@ description: A simple example of a Markdown blog post.
 category: Examples
 tags: [Markdown, Blogging]
 draft: true
+image: https://t4.ftcdn.net/jpg/02/20/89/49/360_F_220894919_dHe2SOXAdnjI4nt8td3ot4ZhmEmE6WRa.jpg
 ---
 
 # Markdown Tutorial
