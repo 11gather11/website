@@ -13,22 +13,11 @@ const { Content } = await render(aboutArticle)
 ---
 
 <PageLayout>
-	<div class='article-wrapper'>
-		<div class='article'>
+	<div class='w-full rounded-2xl bg-card p-10'>
+		<div class='flex flex-col'>
 			<Markdown>
 				<Content />
 			</Markdown>
 		</div>
 	</div>
 </PageLayout>
-
-<style>
-	@reference "../styles/globals.css";
-
-	.article-wrapper {
-		@apply w-full rounded-2xl bg-card p-10;
-	}
-	.article {
-		@apply flex flex-col;
-	}
-</style>
