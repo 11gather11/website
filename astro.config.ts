@@ -11,6 +11,7 @@ import remarkBreaks from 'remark-breaks'
 import remarkEmoji from 'remark-emoji'
 import remarkLinkCard from 'remark-link-card-plus'
 import remarkMath from 'remark-math'
+import sonda from 'sonda/astro'
 
 import { SITE } from './src/config'
 import remarkExcerpt from './src/plugins/remark-excerpt'
@@ -22,6 +23,13 @@ export default defineConfig({
 	site: SITE.site,
 	base: SITE.base,
 	trailingSlash: SITE.trailingSlash ? 'always' : 'never',
+
+	vite: {
+		plugins: [tailwindcss()],
+		build: {
+			sourcemap: true,
+		},
+	},
 
 	integrations: [
 		swup({
@@ -39,11 +47,8 @@ export default defineConfig({
 		sitemap(),
 		pagefind(),
 		svelte(),
+		sonda(),
 	],
-
-	vite: {
-		plugins: [tailwindcss()],
-	},
 
 	markdown: {
 		shikiConfig: {
