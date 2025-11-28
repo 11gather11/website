@@ -3,33 +3,7 @@
 ---
 
 <script>
-	import lozad from 'lozad'
 	import { OverlayScrollbars } from 'overlayscrollbars'
-
-	/**
-	 * 遅延読み込みの初期化
-	 * .lozadクラスを持つ画像に遅延読み込みを適用し、
-	 * 読み込み完了時に'loaded'クラスを追加
-	 */
-	const setupLozad = (): void => {
-		try {
-			const lozadElements = document.querySelectorAll('.lozad')
-
-			if (lozadElements.length === 0) {
-				return // 対象要素がない場合は早期リターン
-			}
-
-			const observer = lozad('.lozad', {
-				loaded: (element: Element) => {
-					element.classList.add('loaded')
-				},
-			})
-
-			observer.observe()
-		} catch (error) {
-			console.error('遅延読み込みの初期化に失敗しました:', error)
-		}
-	}
 
 	/**
 	 * カスタムスクロールバーの設定
@@ -87,11 +61,10 @@
 
 	/**
 	 * メイン初期化関数
-	 * 全てのコンポーネント（遅延読み込み、スクロールバー）を初期化
+	 * スクロールバーを初期化
 	 */
 	const setup = (): void => {
 		try {
-			setupLozad()
 			setupScrollBar()
 		} catch (error) {
 			console.error('初期化に失敗しました:', error)
