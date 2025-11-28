@@ -1,10 +1,8 @@
 ---
-import 'astro-pagefind'
-
 import { Icon } from 'astro-icon/components'
 
-import MobileSearchBar from '@/components/common/MobileSearchBar.svelte'
-import SearchBar from '@/components/common/SearchBar.svelte'
+import MobileSearchBar from '@/components/common/MobileSearchBar.astro'
+import SearchBar from '@/components/common/SearchBar.astro'
 import { siteConfig } from '@/config/site'
 
 const navCount = siteConfig.navigators.length
@@ -105,7 +103,7 @@ const navCount = siteConfig.navigators.length
 			`}
 		>
 			<div class='lg:hidden'>
-				<MobileSearchBar client:only='svelte' />
+				<MobileSearchBar />
 			</div>
 			<div
 				class={`
@@ -113,7 +111,7 @@ const navCount = siteConfig.navigators.length
 					lg:block
 				`}
 			>
-				<SearchBar client:only='svelte' />
+				<SearchBar />
 			</div>
 			<div>
 				<button
