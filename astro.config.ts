@@ -12,13 +12,16 @@ import remarkEmoji from 'remark-emoji'
 import remarkLinkCard from 'remark-link-card-plus'
 import remarkMath from 'remark-math'
 
-import { siteConfig } from './src/config/site'
+import { SITE } from './src/config'
 import remarkExcerpt from './src/plugins/remark-excerpt'
 import remarkReadingTime from './src/plugins/remark-reading-time'
 
-// https://astro.build/config
 export default defineConfig({
-	site: siteConfig.site,
+	output: 'static',
+
+	site: SITE.site,
+	base: SITE.base,
+	trailingSlash: SITE.trailingSlash ? 'always' : 'never',
 
 	integrations: [
 		swup({

@@ -1,6 +1,7 @@
 ---
 import Banner from '@/components/common/Banner.astro'
 import Footer from '@/components/layout/Footer.astro'
+import MobileSidebar from '@/components/layout/MobileSidebar.astro'
 import NavBar from '@/components/layout/Navbar.astro'
 import SideBar from '@/components/layout/SideBar.astro'
 import { siteConfig } from '@/config/site'
@@ -38,6 +39,7 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 				<main class='onload-animation xl:w-[calc(var(--spacing-page-width-xl)-264px)]'>
 					<slot />
 				</main>
+				<MobileSidebar />
 				<slot name='footer'>
 					<Footer />
 				</slot>

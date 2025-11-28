@@ -3,7 +3,7 @@ export const siteConfig = {
 	subtitle: '11gather11 Official Blog site',
 	brandTitle: 'gggg',
 
-	description: '11gather11 Official Blog site. ',
+	description: '11gather11 Official site',
 
 	site: 'https://11gather11.com/',
 
