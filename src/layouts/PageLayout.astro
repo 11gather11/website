@@ -27,13 +27,15 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 		)
 	}
 
-	<div class='main-container my-10'>
+	<div
+		class='my-10 w-full md:mx-auto md:max-w-[80%] md:min-w-[80%] lg:max-w-page-width-lg lg:min-w-page-width-lg xl:max-w-page-width-xl xl:min-w-page-width-xl'
+	>
 		<div class='flex flex-row items-start xl:space-x-4'>
-			<div class='side-bar'>
+			<div class='hidden min-w-[248px] xl:block'>
 				<SideBar />
 			</div>
 			<div class='transition-leaving w-full space-y-8'>
-				<main class='content onload-animation'>
+				<main class='onload-animation xl:w-[calc(var(--spacing-page-width-xl)-264px)]'>
 					<slot />
 				</main>
 				<slot name='footer'>
@@ -43,20 +45,3 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 		</div>
 	</div>
 </Layout>
-
-<style>
-	@reference "../styles/globals.css";
-
-	.main-container {
-		@apply w-full md:max-w-[80%] md:min-w-[80%] lg:max-w-page-width-lg lg:min-w-page-width-lg xl:max-w-page-width-xl xl:min-w-page-width-xl;
-		@apply md:mx-auto;
-	}
-
-	.side-bar {
-		@apply hidden min-w-[248px] xl:block;
-	}
-
-	.content {
-		@apply xl:w-[calc(var(--spacing-page-width-xl)-264px)];
-	}
-</style>
