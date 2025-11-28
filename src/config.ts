@@ -1,5 +1,6 @@
 export const SITE = {
 	name: 'My Awesome Website',
+	author: '11gather11',
 	site: 'https://11gather11.com',
 	base: '/',
 	trailingSlash: false,
