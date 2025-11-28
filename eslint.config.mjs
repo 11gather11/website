@@ -4,6 +4,7 @@ import astroParser from 'astro-eslint-parser'
 import { defineConfig } from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginAstro from 'eslint-plugin-astro'
+import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import globals from 'globals'
@@ -42,6 +43,23 @@ export default defineConfig([
 			parserOptions: {
 				parser: tsParser,
 				extraFileExtensions: ['.astro'],
+			},
+		},
+		plugins: {
+			'better-tailwindcss': eslintPluginBetterTailwindcss,
+		},
+		rules: {
+			// enable all recommended rules to report a warning
+			...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
+			// enable all recommended rules to report an error
+			...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
+
+			'better-tailwindcss/enforce-consistent-line-wrapping': ['warn', { printWidth: 120, indent: 'tab' }],
+			'better-tailwindcss/no-unregistered-classes': ['error', { detectComponentClasses: true }],
+		},
+		settings: {
+			'better-tailwindcss': {
+				entryPoint: './src/styles/globals.css',
 			},
 		},
 	},

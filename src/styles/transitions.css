@@ -1,4 +1,4 @@
-.transition-leaving {
+@utility transition-leaving {
 	transition:
 		transform 300ms,
 		opacity 300ms;

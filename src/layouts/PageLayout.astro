@@ -29,14 +29,34 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 	}
 
 	<div
-		class='my-10 w-full md:mx-auto md:max-w-[80%] md:min-w-[80%] lg:max-w-page-width-lg lg:min-w-page-width-lg xl:max-w-page-width-xl xl:min-w-page-width-xl'
+		class={`
+			my-10 w-full
+			md:mx-auto md:max-w-[80%] md:min-w-[80%]
+			lg:max-w-page-width-lg lg:min-w-page-width-lg
+			xl:max-w-page-width-xl xl:min-w-page-width-xl
+		`}
 	>
-		<div class='flex flex-row items-start xl:space-x-4'>
-			<div class='hidden min-w-[248px] xl:block'>
+		<div
+			class={`
+				flex flex-row items-start
+				xl:space-x-4
+			`}
+		>
+			<div
+				class={`
+					hidden min-w-[248px]
+					xl:block
+				`}
+			>
 				<SideBar />
 			</div>
-			<div class='transition-leaving w-full space-y-8'>
-				<main class='onload-animation xl:w-[calc(var(--spacing-page-width-xl)-264px)]'>
+			<div class='w-full space-y-8 transition-leaving'>
+				<main
+					class={`
+						onload-animation
+						xl:w-[calc(var(--spacing-page-width-xl)-264px)]
+					`}
+				>
 					<slot />
 				</main>
 				<MobileSidebar />

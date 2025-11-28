@@ -10,8 +10,7 @@ export default {
 	trailingComma: 'es5',
 	printWidth: 120,
 
-	plugins: ['prettier-plugin-astro', 'prettier-plugin-tailwindcss'],
-	tailwindStylesheet: './src/styles/globals.css',
+	plugins: ['prettier-plugin-astro'],
 	overrides: [
 		{
 			files: '*.astro',
