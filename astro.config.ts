@@ -1,4 +1,5 @@
 import sitemap from '@astrojs/sitemap'
+import compress from '@playform/compress'
 import swup from '@swup/astro'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
@@ -45,6 +46,7 @@ export default defineConfig({
 		icon(),
 		sitemap(),
 		pagefind(),
+		compress(),
 		sonda(),
 	],
 
