@@ -27,10 +27,7 @@ const remarkReadingTime = () => {
 			file.data.astro.frontmatter = {}
 		}
 
-		file.data.astro.frontmatter.minutes = Math.max(
-			1,
-			Math.round(readingTime.minutes)
-		)
+		file.data.astro.frontmatter.minutes = Math.max(1, Math.round(readingTime.minutes))
 		file.data.astro.frontmatter.words = readingTime.words
 	}
 }

@@ -1,0 +1,29 @@
+---
+import '@/styles/globals.css'
+
+import BasicScripts from '@/components/common/BasicScripts.astro'
+import CommonMeta from '@/components/common/CommonMeta.astro'
+import Favicons from '@/components/common/Favicons.astro'
+import Metadata from '@/components/common/Metadata.astro'
+import { I18N } from '@/config.ts'
+
+interface Props {
+	title?: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang={I18N.lang} dir={I18N.dir}>
+	<head>
+		<CommonMeta />
+		<Favicons />
+		<Metadata title={title} />
+	</head>
+	<body class='bg-background tracking-tight text-foreground antialiased'>
+		<slot />
+
+		<BasicScripts />
+	</body>
+</html>

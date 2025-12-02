@@ -1,11 +1,11 @@
-import type { SiteConfig } from '@/types/site'
+import banner from '@/assets/banners/banner.png'
 
-export const siteConfig: SiteConfig = {
+export const siteConfig = {
 	title: 'ggggg',
 	subtitle: '11gather11 Official Blog site',
 	brandTitle: 'gggg',
 
-	description: '11gather11 Official Blog site. ',
+	description: '11gather11 Official site',
 
 	site: 'https://11gather11.com/',
 
@@ -67,21 +67,9 @@ export const siteConfig: SiteConfig = {
 	maxFooterCategoryChip: 6,
 	maxFooterTagChip: 24,
 
-	banners: [
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-	],
-
-	slugMode: 'HASH',
-	slugLength: 16,
+	banners: [banner, banner, banner, banner, banner, banner, banner, banner],
 
 	bannerStyle: 'LOOP',
 
 	pageSize: 8,
-}
+} as const

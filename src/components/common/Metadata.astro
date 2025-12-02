@@ -1,7 +1,4 @@
 ---
-import '@/styles/globals.css'
-
-import ScriptSetup from '@/components/common/ScriptSetup.astro'
 import { siteConfig } from '@/config/site'
 
 interface Props {
@@ -26,10 +23,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 ---
 
 <!-- Global Metadata -->
-<meta charset='utf-8' />
-<meta name='viewport' content='width=device-width,initial-scale=1' />
 <link rel='icon' href='/favicon.ico' />
-<meta name='generator' content={Astro.generator} />
 
 <!-- Canonical URL -->
 <link rel='canonical' href={canonicalURL} />
@@ -54,14 +48,4 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 {ogImage && <meta property='twitter:image' content={ogImage} />}
 
 <!-- RSS AutoDiscovery -->
-<link
-	rel='alternate'
-	type='application/rss+xml'
-	title={siteConfig.title}
-	href={new URL('rss.xml', Astro.site)}
-/>
-
-<!-- SiteMap -->
-<link rel='sitemap' href='/sitemap-index.xml' />
-
-<ScriptSetup />
+<link rel='alternate' type='application/rss+xml' title={siteConfig.title} href={new URL('rss.xml', Astro.site)} />

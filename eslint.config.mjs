@@ -4,7 +4,7 @@ import astroParser from 'astro-eslint-parser'
 import { defineConfig } from 'eslint/config'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginAstro from 'eslint-plugin-astro'
-import tailwindcss from 'eslint-plugin-better-tailwindcss'
+import eslintPluginBetterTailwindcss from 'eslint-plugin-better-tailwindcss'
 import jsxA11y from 'eslint-plugin-jsx-a11y'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import globals from 'globals'
@@ -45,19 +45,21 @@ export default defineConfig([
 				extraFileExtensions: ['.astro'],
 			},
 		},
-	},
-
-	{
 		plugins: {
-			'better-tailwindcss': tailwindcss,
+			'better-tailwindcss': eslintPluginBetterTailwindcss,
 		},
 		rules: {
-			...tailwindcss.configs['recommended-warn'].rules,
-			...tailwindcss.configs['recommended-error'].rules,
+			// enable all recommended rules to report a warning
+			...eslintPluginBetterTailwindcss.configs['recommended-warn'].rules,
+			// enable all recommended rules to report an error
+			...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
+
+			'better-tailwindcss/enforce-consistent-line-wrapping': ['warn', { printWidth: 120, indent: 'tab' }],
+			'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['banner-inner'] }],
 		},
 		settings: {
 			'better-tailwindcss': {
-				entryPoint: 'src/styles/global.css',
+				entryPoint: './src/styles/globals.css',
 			},
 		},
 	},

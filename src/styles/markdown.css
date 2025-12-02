@@ -7,7 +7,7 @@
 }
 
 .article code:not(pre code) {
-	@apply text-sm !font-code;
+	@apply font-code! text-sm;
 	border-radius: 4px;
 	color: var(--color-primary) !important;
 	background-color: var(--color-primary-lighten) !important;
@@ -49,15 +49,15 @@
 }
 
 .article li::marker {
-	@apply !text-primary;
+	@apply text-primary!;
 }
 
 .article blockquote {
-	@apply !border-s-primary;
+	@apply border-s-primary!;
 }
 
 .article blockquote {
-	@apply py-0.5 pl-3 pr-3 lg:pl-4 !not-italic rounded-sm !bg-primary-transparent;
+	@apply rounded-sm bg-primary-transparent! py-0.5 pr-3 pl-3 not-italic! lg:pl-4;
 }
 
 .article blockquote blockquote {
@@ -101,7 +101,7 @@
 }
 
 .article span.line {
-	@apply !font-code;
+	@apply font-code!;
 	font-size: 14px !important;
 	line-height: normal;
 }

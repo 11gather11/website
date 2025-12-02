@@ -1,5 +1,4 @@
 import sitemap from '@astrojs/sitemap'
-import svelte from '@astrojs/svelte'
 import swup from '@swup/astro'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
@@ -11,14 +10,25 @@ import remarkBreaks from 'remark-breaks'
 import remarkEmoji from 'remark-emoji'
 import remarkLinkCard from 'remark-link-card-plus'
 import remarkMath from 'remark-math'
+import sonda from 'sonda/astro'
 
-import { siteConfig } from './src/config/site'
+import { SITE } from './src/config'
 import remarkExcerpt from './src/plugins/remark-excerpt'
 import remarkReadingTime from './src/plugins/remark-reading-time'
 
-// https://astro.build/config
 export default defineConfig({
-	site: siteConfig.site,
+	output: 'static',
+
+	site: SITE.site,
+	base: SITE.base,
+	trailingSlash: SITE.trailingSlash ? 'always' : 'never',
+
+	vite: {
+		plugins: [tailwindcss()],
+		build: {
+			sourcemap: true,
+		},
+	},
 
 	integrations: [
 		swup({
@@ -35,12 +45,8 @@ export default defineConfig({
 		icon(),
 		sitemap(),
 		pagefind(),
-		svelte(),
+		sonda(),
 	],
-
-	vite: {
-		plugins: [tailwindcss()],
-	},
 
 	markdown: {
 		shikiConfig: {

@@ -2,7 +2,7 @@
 import { getEntry, render } from 'astro:content'
 
 import Markdown from '@/components/common/Markdown.astro'
-import MainLayout from '@/layouts/MainLayout.astro'
+import PageLayout from '@/layouts/PageLayout.astro'
 
 const aboutArticle = await getEntry('specs', 'about')
 if (!aboutArticle) {
@@ -12,23 +12,12 @@ if (!aboutArticle) {
 const { Content } = await render(aboutArticle)
 ---
 
-<MainLayout>
-	<div class='article-wrapper'>
-		<div class='article'>
+<PageLayout>
+	<div class='w-full rounded-2xl bg-card p-10'>
+		<div class='flex flex-col'>
 			<Markdown>
 				<Content />
 			</Markdown>
 		</div>
 	</div>
-</MainLayout>
-
-<style>
-	@reference "../styles/globals.css";
-
-	.article-wrapper {
-		@apply bg-card w-full rounded-2xl p-10;
-	}
-	.article {
-		@apply flex flex-col;
-	}
-</style>
+</PageLayout>

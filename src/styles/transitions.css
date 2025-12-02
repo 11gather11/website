@@ -1,7 +1,11 @@
-.transition-leaving {
+@utility transition-leaving {
 	transition:
 		transform 300ms,
 		opacity 300ms;
+}
+
+@utility transition-main {
+	transition: opacity 250ms ease-in-out;
 }
 
 html.is-changing .transition-main {

@@ -10,78 +10,67 @@ interface Props {
 const { id, title, published } = Astro.props
 ---
 
-<div class='item'>
-	<a
-		href={id}
+<a
+	href={id}
+	class={`
+		group flex w-full flex-row items-center rounded-md py-2 transition-colors select-none
+		hover:bg-(--color-primary-lighten)
+	`}
+	aria-label={`記事「${title}」を読む`}
+>
+	<!-- 日付表示部分 -->
+	<div
 		class={`
-    flex w-full flex-row items-center rounded-md py-2 transition-colors
-    select-none
-    hover:bg-[var(--color-primary-lighten)]
-  `}
-		aria-label={`記事「${title}」を読む`}
+			flex w-[15%] flex-row justify-end
+			md:w-[10%]
+		`}
 	>
-		<!-- 日付表示部分 -->
-		<div class={`
-    flex w-[15%] flex-row justify-end
-    md:w-[10%]
-  `}>
-			<p class='date text-foreground-lighten text-sm'>
-				{
-					formatDate(published, {
-						month: '2-digit',
-						day: '2-digit',
-					})
-				}
-			</p>
+		<p class='font-primary text-sm text-foreground-lighten'>
+			{
+				formatDate(published, {
+					month: '2-digit',
+					day: '2-digit',
+				})
+			}
+		</p>
+	</div>
+
+	<!-- タイムライン ドット部分 -->
+	<div
+		class={`
+			relative flex h-full w-[15%] items-center
+			md:w-[10%]
+		`}
+	>
+		<div
+			class={`
+				absolute top-1/2 left-[calc(50%-1px)] h-10 -translate-y-1/2 border-l-2 border-dashed border-l-foreground opacity-25
+			`}
+		>
 		</div>
-
-		<!-- タイムライン ドット部分 -->
-		<div class={`
-    dash-line relative flex h-full w-[15%] items-center
-    md:w-[10%]
-  `}>
-			<div
-				class={`
-      item-dot outline-card bg-foreground-lighten z-50 mx-auto h-1 w-1 rounded
-      outline-4 transition-all
-    `}
-			>
-			</div>
+		<div
+			class={`
+				z-50 mx-auto h-1 w-1 rounded bg-foreground-lighten outline-4 outline-card transition-all
+				group-hover:h-4 group-hover:bg-primary group-hover:outline-primary-lighten
+			`}
+		>
 		</div>
+	</div>
 
-		<!-- タイトル表示部分 -->
-		<div class={`
-    flex w-[70%] flex-row
-    md:w-[80%]
-  `}>
-			<p class='title text-foreground truncate font-semibold transition-all'>
-				{title}
-			</p>
-		</div>
-	</a>
-</div>
-
-<style>
-	@reference '../../styles/globals.css';
-
-	.date {
-		@apply font-primary;
-	}
-
-	.title {
-		@apply font-primary;
-	}
-
-	.item:hover .title {
-		@apply text-primary pl-2;
-	}
-
-	.dash-line::before {
-		@apply border-l-foreground absolute top-1/2 h-[40px] w-[10%] -translate-y-1/2 border-l-2 border-dashed opacity-25 content-[''];
-		left: calc(50% - 1px);
-	}
-
-	.item:hover .item-dot {
-		@apply bg-primary outline-primary-lighten h-4;
-	}
-</style>
+	<!-- タイトル表示部分 -->
+	<div
+		class={`
+			flex w-[70%] flex-row
+			md:w-[80%]
+		`}
+	>
+		<p
+			class={`
+				truncate font-primary font-semibold text-foreground transition-all
+				group-hover:pl-2 group-hover:text-primary
+			`}
+		>
+			{title}
+		</p>
+	</div>
+</a>

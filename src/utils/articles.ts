@@ -1,7 +1,5 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 
-import { idToSlug } from '@/utils/hash'
-
 /**
  * ナビゲーションリンク付きのソート済み記事一覧を取得
  *
@@ -13,9 +11,7 @@ import { idToSlug } from '@/utils/hash'
  * - 本番環境: 公開記事のみ表示（下書き除外）
  * - 各記事に nextSlug/nextTitle（新しい記事）、prevSlug/prevTitle（古い記事）を追加
  */
-export const getSortedArticles = async (): Promise<
-	CollectionEntry<'articles'>[]
-> => {
+export const getSortedArticles = async (): Promise<CollectionEntry<'articles'>[]> => {
 	// 環境に基づいて記事をフィルタリングして取得
 	const sortedArticles = (
 		await getCollection('articles', ({ data }) => {
@@ -91,7 +87,7 @@ export const getArchives = async (): Promise<Map<number, Archive[]>> => {
 		// アーカイブオブジェクトを作成して配列に追加
 		archives.get(publishedYear)?.push({
 			title: article.data.title,
-			id: `/articles/${idToSlug(article.id)}`,
+			id: `/articles/${article.id}`,
 			date: publishedDate,
 			tags: article.data.tags,
 		})
@@ -142,7 +138,7 @@ export const getTags = async (): Promise<Map<string, Tag>> => {
 	return allArticles.reduce((tags, article) => {
 		// 各記事のタグを処理
 		for (const tagName of article.data.tags || []) {
-			const tagSlug = idToSlug(tagName)
+			const tagSlug = tagName
 
 			// 該当タグがマップに存在しない場合は新しいTagオブジェクトを作成
 			if (!tags.has(tagSlug)) {
@@ -156,7 +152,7 @@ export const getTags = async (): Promise<Map<string, Tag>> => {
 			// タグに記事を追加
 			tags.get(tagSlug)?.articles.push({
 				title: article.data.title,
-				id: `/articles/${idToSlug(article.id)}`,
+				id: `/articles/${article.id}`,
 				date: new Date(article.data.published),
 				tags: article.data.tags,
 			})
@@ -199,7 +195,7 @@ export const getCategories = async (): Promise<Map<string, Category>> => {
 		// カテゴリが設定されていない記事はスキップ
 		if (!article.data.category) return categories
 
-		const categorySlug = idToSlug(article.data.category)
+		const categorySlug = article.data.category
 
 		// 該当カテゴリがマップに存在しない場合は新しいCategoryオブジェクトを作成
 		if (!categories.has(categorySlug)) {
@@ -213,7 +209,7 @@ export const getCategories = async (): Promise<Map<string, Category>> => {
 		// カテゴリに記事を追加
 		categories.get(categorySlug)?.articles.push({
 			title: article.data.title,
-			id: `/articles/${idToSlug(article.id)}`,
+			id: `/articles/${article.id}`,
 			date: new Date(article.data.published),
 			tags: article.data.tags,
 		})

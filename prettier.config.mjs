@@ -6,9 +6,11 @@ export default {
 	useTabs: true,
 	semi: false,
 	singleQuote: true,
+	jsxSingleQuote: true,
 	trailingComma: 'es5',
 	printWidth: 120,
 
+	plugins: ['prettier-plugin-astro'],
 	overrides: [
 		{
 			files: '*.astro',
@@ -17,6 +19,4 @@ export default {
 			},
 		},
 	],
-
-	plugins: ['prettier-plugin-astro'],
 }
