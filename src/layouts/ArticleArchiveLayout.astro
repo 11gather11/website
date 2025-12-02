@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from 'astro'
+
 import ArchiveArticle from '@/components/common/ArchiveArticle.astro'
 import ArchiveYearTitle from '@/components/common/ArchiveYearTitle.astro'
 import PageLayout from '@/layouts/PageLayout.astro'
@@ -8,7 +10,7 @@ interface Props {
 	archiveMap: Map<number, Array<Archive>>
 	title?: string
 	subTitle?: string
-	bannerImage?: string
+	bannerImage?: ImageMetadata
 	slug?: string
 }
 

@@ -1,3 +1,5 @@
+import banner from '@/assets/banners/banner.png'
+
 export const siteConfig = {
 	title: 'ggggg',
 	subtitle: '11gather11 Official Blog site',
@@ -65,16 +67,7 @@ export const siteConfig = {
 	maxFooterCategoryChip: 6,
 	maxFooterTagChip: 24,
 
-	banners: [
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-		'/images/banner.png',
-	],
+	banners: [banner, banner, banner, banner, banner, banner, banner, banner],
 
 	bannerStyle: 'LOOP',
 
