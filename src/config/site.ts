@@ -1,3 +1,4 @@
+import avatar from '@/assets/avatar.png'
 import banner from '@/assets/banners/banner.png'
 
 export const siteConfig = {
@@ -29,7 +30,7 @@ export const siteConfig = {
 	username: '11gather11',
 	copyrightName: '11gather11Works',
 	sign: 'a 11gather11Works project',
-	avatarUrl: '/images/meoLogo.png',
+	avatar: avatar,
 
 	socialLinks: [
 		{

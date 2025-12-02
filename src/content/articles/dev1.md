@@ -4,7 +4,7 @@ published: 2025-01-20
 description: A simple example of a Markdown blog post.
 category: Examples
 tags: [Markdown, Blogging]
-draft: true
+draft: false
 image: ./cover.jpg
 ---
 

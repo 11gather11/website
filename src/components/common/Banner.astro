@@ -57,18 +57,19 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 					<ul id='carousel_images'>
 						{carouselImagesList.map((img, index) => (
 							<li
-								class={`
-									absolute top-0 left-0 z-0 h-full w-full origin-center bg-cover bg-center bg-no-repeat opacity-0 backface-hidden
-									transform-3d
-								`}
+								class={`absolute top-0 left-0 z-0 h-full w-full origin-center opacity-0 backface-hidden transform-3d`}
 								style={{
 									animation: `carousel-animation ${carouselAnimationTime} linear infinite 0s`,
 									animationDelay: `${index * 6}s`,
-									backgroundImage: `url(${img.src})`,
 								}}
-								role='img'
-								aria-label={`バナー画像 ${index + 1}`}
-							/>
+							>
+								<Image
+									src={img}
+									alt={`バナー画像 ${index + 1}`}
+									class='h-full w-full object-cover'
+									loading={index === 0 ? 'eager' : 'lazy'}
+								/>
+							</li>
 						))}
 					</ul>
 				</div>
