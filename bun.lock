@@ -15,6 +15,7 @@
         "astro": "5.16.3",
         "astro-icon": "1.1.5",
         "astro-pagefind": "1.8.5",
+        "mdast": "3.0.0",
         "mdast-util-to-string": "4.0.0",
         "overlayscrollbars": "2.13.0",
         "reading-time": "1.5.0",
@@ -26,6 +27,7 @@
         "remark-math": "6.0.0",
         "tailwindcss": "4.1.17",
         "tw-animate-css": "1.4.0",
+        "vfile": "6.0.3",
       },
       "devDependencies": {
         "@astrojs/check": "0.9.6",
@@ -1581,6 +1583,8 @@
     "math-intrinsics": ["math-intrinsics@1.1.0", "", {}, "sha512-/IXtbwEk5HTPyEwyKX6hGkYXxM9nbj64B+ilVJnC/R6B0pH5G4V3b0pVbL7DBj4tkhBAppbQUlf6F6Xl9LHu1g=="],
 
     "maxmin": ["maxmin@2.1.0", "", { "dependencies": { "chalk": "^1.0.0", "figures": "^1.0.1", "gzip-size": "^3.0.0", "pretty-bytes": "^3.0.0" } }, "sha512-NWlApBjW9az9qRPaeg7CX4sQBWwytqz32bIEo1PW9pRW+kBP9KLRfJO3UC+TV31EcQZEUq7eMzikC7zt3zPJcw=="],
+
+    "mdast": ["mdast@3.0.0", "", {}, "sha512-xySmf8g4fPKMeC07jXGz971EkLbWAJ83s4US2Tj9lEdnZ142UP5grN73H1Xd3HzrdbU5o9GYYP/y8F9ZSwLE9g=="],
 
     "mdast-util-definitions": ["mdast-util-definitions@6.0.0", "", { "dependencies": { "@types/mdast": "^4.0.0", "@types/unist": "^3.0.0", "unist-util-visit": "^5.0.0" } }, "sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ=="],
 
