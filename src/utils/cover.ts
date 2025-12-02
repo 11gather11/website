@@ -14,7 +14,7 @@ import { getIndexFromSlugID } from '@/utils/hash'
  */
 export const getCoverImageByID = (id: string): string => {
 	// バナー配列の存在チェック
-	if (!siteConfig.banners || siteConfig.banners.length === 0) {
+	if (!siteConfig.banners) {
 		throw new Error('No banners configured in site settings')
 	}
 
