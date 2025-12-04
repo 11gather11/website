@@ -44,7 +44,8 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 						h-56 w-56 rounded-xl transition-all select-none
 						hover:cursor-pointer
 					`}
-					loading='lazy'
+					loading='eager'
+					fetchpriority='high'
 				/>
 			</a>
 			<div class='mt-4'>

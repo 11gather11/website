@@ -77,3 +77,12 @@ export const I18N = {
 } as const
 
 export const BANNERS = [banner, banner, banner, banner, banner, banner, banner, banner] as const
+
+/**
+ * レスポンシブ画像の幅設定
+ * - 640: モバイル (sm)
+ * - 1024: タブレット (lg)
+ * - 1280: デスクトップ (xl)
+ * - 1920: 大画面
+ */
+export const IMAGE_WIDTHS = [640, 1024, 1280, 1920] as const
