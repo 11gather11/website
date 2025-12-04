@@ -6,7 +6,6 @@ import Footer from '@/components/widgets/Footer.astro'
 import Header from '@/components/widgets/Header.astro'
 import MobileSidebar from '@/components/widgets/MobileSidebar.astro'
 import SideBar from '@/components/widgets/SideBar.astro'
-import { siteConfig } from '@/config/site'
 import Layout from '@/layouts/Layout.astro'
 
 interface Props {
@@ -23,13 +22,7 @@ const { title, subTitle, bannerImage, slug } = Astro.props
 	<slot name='header'>
 		<Header />
 	</slot>
-
-	{
-		siteConfig.bannerStyle === 'LOOP' && (
-			<Banner title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug} />
-		)
-	}
-
+	<Banner title={title} subTitle={subTitle} bannerImage={bannerImage} slug={slug} />
 	<div
 		class={`
 			my-10 w-full

@@ -3,14 +3,14 @@ import type { GetStaticPaths } from 'astro'
 
 import ArticleCard from '@/components/common/ArticleCard.astro'
 import Pagination from '@/components/common/Pagination.astro'
-import { siteConfig } from '@/config/site'
+import { SITE } from '@/config'
 import PageLayout from '@/layouts/PageLayout.astro'
 import { getSortedArticles } from '@/utils/articles'
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const articles = await getSortedArticles()
 	return paginate(articles, {
-		pageSize: siteConfig.pageSize,
+		pageSize: SITE.pageSize,
 	})
 }) satisfies GetStaticPaths
 

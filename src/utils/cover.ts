@@ -1,13 +1,13 @@
 import type { ImageMetadata } from 'astro'
 
-import { siteConfig } from '@/config/site'
+import { BANNERS } from '@/config'
 import { getIndexFromSlugID } from '@/utils/hash'
 
 export const getCoverImageByID = (id: string): ImageMetadata => {
-	if (!siteConfig.banners) {
+	if (!BANNERS) {
 		throw new Error('No banners configured in site settings')
 	}
 
-	const index = getIndexFromSlugID(id, siteConfig.banners.length)
-	return siteConfig.banners[index]
+	const index = getIndexFromSlugID(id, BANNERS.length)
+	return BANNERS[index]
 }

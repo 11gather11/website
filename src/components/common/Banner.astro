@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
 
+import { BANNERS } from '@/config'
 import { siteConfig } from '@/config/site'
 import { getCoverImageByID } from '@/utils/cover'
 
@@ -19,7 +20,7 @@ const hasTitle = title !== undefined || subTitle !== undefined
 const hasHeaderImg = bannerImage !== undefined || slug !== undefined
 
 // カルーセル設定
-const carouselImagesList = siteConfig.banners
+const carouselImagesList = BANNERS
 const carouselAnimationTime = `${carouselImagesList.length * 6}s`
 
 // 表示テキストの決定
