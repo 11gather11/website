@@ -1,5 +1,5 @@
 import avatar from './assets/avatar.png'
-import banner from './assets/banners/banner.png'
+import banner from './assets/banners/banner.webp'
 
 const NAVIGATORS = [
 	{
