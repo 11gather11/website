@@ -8,7 +8,7 @@ import { Icon } from 'astro-icon/components'
 		id='mobile-search-button'
 		class={`
 			flex w-11 justify-center rounded-lg py-2 text-foreground transition-all
-			hover:bg-primary-hover hover:text-primary
+			hover:bg-primary/10 hover:text-primary
 		`}
 		aria-label='検索を開く'
 	>
@@ -29,12 +29,7 @@ import { Icon } from 'astro-icon/components'
 			lg:hidden
 		`}
 	>
-		<div
-			class={`
-				flex h-10 flex-row rounded-lg bg-black/5
-				dark:bg-white/5
-			`}
-		>
+		<div class={`flex h-10 flex-row rounded-lg bg-muted/50`}>
 			<label
 				for='mobile-search-input'
 				class={`
@@ -48,7 +43,7 @@ import { Icon } from 'astro-icon/components'
 				id='mobile-search-input'
 				class={`
 					grow bg-transparent text-foreground transition-all outline-none
-					placeholder:text-foreground-lighten
+					placeholder:text-muted-foreground
 				`}
 				placeholder='検索'
 				type='text'
@@ -127,7 +122,7 @@ import { Icon } from 'astro-icon/components'
 				(item) => `
 			<a
 				href="${item.url}"
-				class="mx-2 py-2 px-3 rounded-xl result-item transition-all hover:bg-black/5 dark:hover:bg-white/5"
+				class="mx-2 py-2 px-3 rounded-xl result-item transition-all"
 				data-mobile-search-result
 			>
 				<div class="flex flex-row space-x-1 items-center">
@@ -139,7 +134,7 @@ import { Icon } from 'astro-icon/components'
 					</span>
 				</div>
 				<div class="h-10">
-					<p class="item-excerpt text-sm line-clamp-2 text-foreground-lighten">
+					<p class="item-excerpt text-sm line-clamp-2 text-muted-foreground">
 						${item.excerpt}
 					</p>
 				</div>

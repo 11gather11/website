@@ -32,8 +32,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 				<div
 					class={`
 						absolute top-0 left-0 h-56 w-56 rounded-xl transition-all content-['']
-						group-hover:bg-black/25
-						dark:group-hover:bg-black/50
+						group-hover:bg-muted/50
 					`}
 				>
 				</div>
@@ -49,9 +48,9 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 				/>
 			</a>
 			<div class='mt-4'>
-				<p class='text-center font-title text-xl font-semibold text-foreground'>{SITE.author}</p>
+				<p class='text-center font-serif text-xl font-semibold text-foreground'>{SITE.author}</p>
 			</div>
-			<p class='mt-2 text-center font-title text-foreground-lighten'>
+			<p class='mt-2 text-center font-serif text-muted-foreground'>
 				{SITE.sign}
 			</p>
 			{
@@ -64,7 +63,6 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 										class={`
 											flex h-10 w-10 flex-col justify-center rounded-lg transition-all
 											hover:brightness-75
-											dark:hover:brightness-125
 										`}
 									>
 										<div class='flex flex-row justify-center'>
@@ -91,7 +89,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 						<a
 							href='/categories/'
 							class={`
-								pl-4 font-primary text-xl font-bold text-foreground transition-colors
+								pl-4 font-sans text-xl font-bold text-foreground transition-colors
 								hover:text-primary
 							`}
 						>
@@ -103,8 +101,8 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 							<a
 								href={`/categories/${categorySlug}`}
 								class={`
-									group flex flex-row items-center justify-between rounded-lg px-3 py-2 font-primary transition-all
-									hover:bg-primary-lighten
+									group flex flex-row items-center justify-between rounded-lg px-3 py-2 font-sans transition-all
+									hover:bg-secondary
 								`}
 							>
 								<p
@@ -115,9 +113,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 								>
 									{categoryData.name}
 								</p>
-								<span class='rounded-md bg-primary-lighten px-2.5 py-0.5 text-primary'>
-									{categoryData.articles.length}
-								</span>
+								<span class='rounded-md bg-secondary px-2.5 py-0.5 text-primary'>{categoryData.articles.length}</span>
 							</a>
 						))}
 						{shouldShowCategoryMore && (
@@ -132,7 +128,6 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 									class={`
 										flex flex-row items-center space-x-1 text-primary transition-colors
 										hover:brightness-75
-										dark:hover:brightness-125
 									`}
 								>
 									<span>もっと見る</span>
@@ -157,7 +152,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 						<a
 							href='/tags/'
 							class={`
-								pl-4 font-primary text-xl font-bold text-foreground transition-colors
+								pl-4 font-sans text-xl font-bold text-foreground transition-colors
 								hover:text-primary
 							`}
 						>
@@ -169,7 +164,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 							<a
 								href={`/tags/${tagSlug}`}
 								class={`
-									m-1 grow rounded-md bg-primary-lighten px-2 py-1 font-primary transition-all
+									m-1 grow rounded-md bg-secondary px-2 py-1 font-sans transition-all
 									hover:brightness-95
 								`}
 							>
@@ -188,7 +183,6 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 									class={`
 										flex flex-row items-center space-x-1 text-primary transition-colors
 										hover:brightness-75
-										dark:hover:brightness-125
 									`}
 								>
 									<span>もっと見る</span>

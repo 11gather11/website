@@ -67,10 +67,7 @@ const categorySlug = category ? category : null
 			<div class='mx-2 flex flex-row justify-between'>
 				<!-- 公開日 -->
 				<div
-					class={`
-						flex flex-row items-center space-x-2 rounded-md bg-black/50 px-1.5 py-0.5 text-primary-lighten
-						dark:text-foreground
-					`}
+					class={`flex flex-row items-center space-x-2 rounded-md bg-secondary/90 px-1.5 py-0.5 text-secondary-foreground`}
 				>
 					<Icon name='tabler:calendar-week' />
 					<span class='select-none'>
@@ -81,10 +78,7 @@ const categorySlug = category ? category : null
 				{
 					category && (
 						<div
-							class={`
-								flex flex-row items-center space-x-2 rounded-md bg-black/50 px-1.5 py-0.5 text-primary-lighten
-								dark:text-foreground
-							`}
+							class={`flex flex-row items-center space-x-2 rounded-md bg-secondary/90 px-1.5 py-0.5 text-secondary-foreground`}
 						>
 							<Icon name='tabler:folder' />
 							<span class='max-w-28 truncate select-none'>{category}</span>
@@ -122,7 +116,7 @@ const categorySlug = category ? category : null
 				<a
 					href={contentUrl}
 					class={`
-						group flex w-full flex-row items-center space-x-1 align-top font-primary text-xl font-semibold text-foreground
+						group flex w-full flex-row items-center space-x-1 align-top font-sans text-xl font-semibold text-foreground
 						transition-all
 						hover:text-primary
 						lg:text-2xl
@@ -151,17 +145,12 @@ const categorySlug = category ? category : null
 			>
 				<ul class='flex flex-row space-x-4'>
 					<!-- 公開日 -->
-					<li class='flex flex-row items-center space-x-2 font-primary'>
-						<div
-							class={`
-								flex flex-row items-center rounded-lg bg-primary-lighten p-2
-								dark:bg-card-lighten
-							`}
-						>
+					<li class='flex flex-row items-center space-x-2 font-sans'>
+						<div class={`flex flex-row items-center rounded-lg bg-secondary p-2`}>
 							<Icon name='tabler:calendar-week' size={20} class='text-primary' />
 						</div>
 						<span
-							class={`inline-block self-center truncate align-middle font-primary text-sm text-foreground-lighten select-none`}
+							class={`inline-block self-center truncate align-middle font-sans text-sm text-muted-foreground select-none`}
 						>
 							{formatDate(published)}
 						</span>
@@ -170,19 +159,14 @@ const categorySlug = category ? category : null
 					<!-- カテゴリ -->
 					{
 						category && categorySlug && (
-							<li class='flex flex-row items-center space-x-1.5 font-primary'>
-								<div
-									class={`
-										flex flex-row items-center rounded-lg bg-primary-lighten p-2
-										dark:bg-card-lighten
-									`}
-								>
+							<li class='flex flex-row items-center space-x-1.5 font-sans'>
+								<div class={`flex flex-row items-center rounded-lg bg-secondary p-2`}>
 									<Icon name='tabler:folder' size={20} class='text-primary' />
 								</div>
 								<a
 									class={`
-										rounded-md px-1.5 py-0.5 text-sm text-foreground-lighten transition-all select-none
-										hover:bg-primary-lighten hover:text-primary
+										rounded-md px-1.5 py-0.5 text-sm text-muted-foreground transition-all select-none
+										hover:bg-secondary hover:text-primary
 									`}
 									href={`/categories/${categorySlug}`}
 									aria-label={`カテゴリ「${category}」の記事一覧`}
@@ -204,23 +188,18 @@ const categorySlug = category ? category : null
 					>
 						{
 							tags && tags.length > 0 && (
-								<div class='flex flex-row items-center space-x-2 font-primary'>
-									<div
-										class={`
-											flex flex-row items-center rounded-lg bg-primary-lighten p-2
-											dark:bg-card-lighten
-										`}
-									>
+								<div class='flex flex-row items-center space-x-2 font-sans'>
+									<div class={`flex flex-row items-center rounded-lg bg-secondary p-2`}>
 										<Icon name='tabler:tag' size={20} class='text-primary' />
 									</div>
 									<ul class='flex flex-row items-center space-x-1'>
 										{tags.slice(0, 3).map((tag, index) => (
-											<li class='flex flex-row items-center text-foreground-lighten select-none'>
+											<li class='flex flex-row items-center text-muted-foreground select-none'>
 												{index > 0 && <span class='pr-1 text-sm'>/</span>}
 												<a
 													class={`
 														rounded-md px-1.5 py-0.5 text-sm transition-all
-														hover:bg-primary-lighten hover:text-primary
+														hover:bg-secondary hover:text-primary
 													`}
 													href={`/tags/${tag}`}
 													aria-label={`タグ「${tag}」の記事一覧`}
@@ -239,7 +218,7 @@ const categorySlug = category ? category : null
 
 			<!-- 記事の概要 -->
 			<div class='lg:ml-2'>
-				<p class='line-clamp-1 font-primary text-sm text-foreground'>{excerpt}</p>
+				<p class='line-clamp-1 font-sans text-sm text-foreground'>{excerpt}</p>
 			</div>
 
 			<!-- 読了時間情報 -->
@@ -250,7 +229,7 @@ const categorySlug = category ? category : null
 						lg:ml-2
 					`}
 				>
-					<div class='space-x-3 align-middle font-primary text-sm text-foreground-lighten'>
+					<div class='space-x-3 align-middle font-sans text-sm text-muted-foreground'>
 						<span>{words}</span>
 						<span>|</span>
 						<span>{minutes}</span>
@@ -274,7 +253,7 @@ const categorySlug = category ? category : null
 			>
 				<div
 					class={`
-						absolute left-0 z-1 h-full w-0 rounded-r-3xl bg-black opacity-50 transition-all duration-300 select-none
+						absolute left-0 z-1 h-full w-0 rounded-r-3xl bg-muted/50 transition-all duration-300 select-none
 						group-hover:w-full
 					`}
 				>
@@ -283,16 +262,13 @@ const categorySlug = category ? category : null
 					name='tabler:chevron-right'
 					size={96}
 					class={`
-						absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-white transition-all duration-300
+						absolute top-1/2 left-1/2 z-10 -translate-x-1/2 -translate-y-1/2 text-muted-foreground transition-all duration-300
 						[clip-path:polygon(0_0,0_0,0_100%,0_100%)]
 						group-hover:[clip-path:polygon(0_0,100%_0%,100%_100%,0_100%)]
 					`}
 				/>
 				<Image
-					class={`
-						h-[212px] w-[404px] rounded-r-3xl object-cover select-none
-						dark:brightness-90
-					`}
+					class={`h-[212px] w-[404px] rounded-r-3xl object-cover select-none`}
 					src={coverImageUrl}
 					alt={`${title}のカバー画像`}
 					loading='lazy'

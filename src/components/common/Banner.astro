@@ -43,17 +43,12 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 			!hasHeaderImg && (
 				<div
 					class={`
-						absolute top-0 left-0 -z-10 block h-[calc(var(--spacing-banner-height)*3/4)] w-full overflow-hidden bg-white
+						absolute top-0 left-0 -z-10 block h-[calc(var(--spacing-banner-height)*3/4)] w-full overflow-hidden
 						fill-mode-[forwards]
 						lg:h-banner-height
 					`}
 				>
-					<div
-						class={`
-							absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-['']
-							dark:bg-black/30
-						`}
-					/>
+					<div class={`absolute top-0 left-0 z-10 block h-full w-full transition-all content-['']`} />
 					<ul id='carousel_images'>
 						{carouselImagesList.map((img, index) => (
 							<li
@@ -79,13 +74,8 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 		<!-- 静的画像表示（画像が指定されている場合） -->
 		{
 			bannerImageUrl && (
-				<div class='absolute top-0 left-0 z-0 block h-banner-height w-full overflow-hidden bg-white'>
-					<div
-						class={`
-							absolute top-0 left-0 z-10 block h-full w-full bg-black/25 transition-all content-['']
-							dark:bg-black/30
-						`}
-					/>
+				<div class='absolute top-0 left-0 z-0 block h-banner-height w-full overflow-hidden'>
+					<div class={`absolute top-0 left-0 z-10 block h-full w-full transition-all content-['']`} />
 					<Image
 						class='h-full w-full object-cover'
 						src={bannerImageUrl}
@@ -107,7 +97,7 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 				<div class='flex flex-col'>
 					<h1
 						class={`
-							mt-8 text-center font-title font-bold text-title drop-shadow-lg
+							mt-8 text-center font-serif font-bold text-primary-foreground drop-shadow-lg
 							lg:mt-1
 							${
 								hasTitle
@@ -126,7 +116,7 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 					</h1>
 					<h2
 						class={`
-							text-center font-subtitle text-xl text-subtitle drop-shadow-md
+							text-center font-serif text-xl text-primary-foreground drop-shadow-md
 							lg:text-3xl
 						`}
 					>

@@ -33,7 +33,7 @@ const { chips, title, subTitle, bannerImage, slug } = Astro.props
 						href={chip.slug}
 						class={`
 							group flex flex-row items-center justify-between rounded-lg px-4 py-2 transition-all select-none
-							hover:bg-primary-lighten
+							hover:bg-secondary
 						`}
 					>
 						<p
@@ -44,9 +44,7 @@ const { chips, title, subTitle, bannerImage, slug } = Astro.props
 						>
 							{chip.name}
 						</p>
-						{chip.subChip && (
-							<span class='ml-2 rounded-md bg-primary-lighten px-3 py-1 text-primary'>{chip.subChip}</span>
-						)}
+						{chip.subChip && <span class='ml-2 rounded-md bg-secondary px-3 py-1 text-primary'>{chip.subChip}</span>}
 					</a>
 				))
 			}

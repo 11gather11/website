@@ -14,7 +14,7 @@ const { id, title, published } = Astro.props
 	href={id}
 	class={`
 		group flex w-full flex-row items-center rounded-md py-2 transition-colors select-none
-		hover:bg-(--color-primary-lighten)
+		hover:bg-secondary
 	`}
 	aria-label={`記事「${title}」を読む`}
 >
@@ -25,7 +25,7 @@ const { id, title, published } = Astro.props
 			md:w-[10%]
 		`}
 	>
-		<p class='font-primary text-sm text-foreground-lighten'>
+		<p class='font-sans text-sm text-muted-foreground'>
 			{
 				formatDate(published, {
 					month: '2-digit',
@@ -50,8 +50,8 @@ const { id, title, published } = Astro.props
 		</div>
 		<div
 			class={`
-				z-50 mx-auto h-1 w-1 rounded bg-foreground-lighten outline-4 outline-card transition-all
-				group-hover:h-4 group-hover:bg-primary group-hover:outline-primary-lighten
+				z-50 mx-auto h-1 w-1 rounded bg-muted-foreground outline-4 outline-card transition-all
+				group-hover:h-4 group-hover:bg-primary group-hover:outline-secondary
 			`}
 		>
 		</div>
@@ -66,7 +66,7 @@ const { id, title, published } = Astro.props
 	>
 		<p
 			class={`
-				truncate font-primary font-semibold text-foreground transition-all
+				truncate font-sans font-semibold text-foreground transition-all
 				group-hover:pl-2 group-hover:text-primary
 			`}
 		>
