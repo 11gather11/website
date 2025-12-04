@@ -55,7 +55,10 @@ export default defineConfig([
 			...eslintPluginBetterTailwindcss.configs['recommended-error'].rules,
 
 			'better-tailwindcss/enforce-consistent-line-wrapping': ['warn', { printWidth: 120, indent: 'tab' }],
-			'better-tailwindcss/no-unregistered-classes': ['error', { ignore: ['banner-inner'] }],
+			'better-tailwindcss/no-unregistered-classes': [
+				'error',
+				{ detectComponentClasses: true, ignore: ['banner-inner'] },
+			],
 		},
 		settings: {
 			'better-tailwindcss': {
