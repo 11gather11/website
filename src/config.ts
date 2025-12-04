@@ -10,7 +10,16 @@ export const SITE = {
 } as const
 
 export const METADATA = {
+	title: {
+		template: '%s | My Awesome Website',
+		default: 'My Awesome Website',
+	},
 	description: 'A blog about awesome things.',
+	openGraph: {
+		title: 'My Awesome Website',
+		type: 'website',
+		image: banner,
+	},
 } as const
 
 export const I18N = {
