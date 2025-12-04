@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 import { Icon } from 'astro-icon/components'
 
-import { siteConfig } from '@/config/site'
+import { SITE } from '@/config'
 import { getCategories, getTags } from '@/utils/articles'
 
 // タグとカテゴリのデータを取得
@@ -14,8 +14,8 @@ const categoryEntries = [...categories.entries()].sort((a, b) => b[1].articles.l
 const tagEntries = [...tags.entries()].sort((a, b) => b[1].articles.length - a[1].articles.length)
 
 // 表示制限の計算
-const maxCategoryDisplay = siteConfig.maxSidebarCategoryChip
-const maxTagDisplay = siteConfig.maxSidebarTagChip
+const maxCategoryDisplay = SITE.maxCategoryCount
+const maxTagDisplay = SITE.maxTagCount
 
 const displayCategories = categoryEntries.slice(0, maxCategoryDisplay)
 const displayTags = tagEntries.slice(0, maxTagDisplay)
@@ -38,7 +38,7 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 				>
 				</div>
 				<Image
-					src={siteConfig.avatar}
+					src={SITE.avatar}
 					alt='avatar'
 					class={`
 						h-56 w-56 rounded-xl transition-all select-none
@@ -48,16 +48,16 @@ const shouldShowTagMore = tagEntries.length > maxTagDisplay
 				/>
 			</a>
 			<div class='mt-4'>
-				<p class='text-center font-title text-xl font-semibold text-foreground'>{siteConfig.username}</p>
+				<p class='text-center font-title text-xl font-semibold text-foreground'>{SITE.author}</p>
 			</div>
 			<p class='mt-2 text-center font-title text-foreground-lighten'>
-				{siteConfig.sign}
+				{SITE.sign}
 			</p>
 			{
-				siteConfig.socialLinks.length > 0 && (
+				SITE.socialLinks.length > 0 && (
 					<div class='mt-1 flex flex-row justify-center'>
 						<div class='flex w-[184px] flex-wrap justify-center gap-2'>
-							{siteConfig.socialLinks.map((item) => (
+							{SITE.socialLinks.map((item) => (
 								<a href={item.link} target='_blank' aria-label={item.link}>
 									<div
 										class={`

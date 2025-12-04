@@ -3,9 +3,9 @@ import { Icon } from 'astro-icon/components'
 
 import MobileSearchBar from '@/components/common/MobileSearchBar.astro'
 import SearchBar from '@/components/common/SearchBar.astro'
-import { siteConfig } from '@/config/site'
+import { SITE } from '@/config'
 
-const navCount = siteConfig.navigators.length
+const navCount = SITE.navigators.length
 ---
 
 <header
@@ -51,7 +51,7 @@ const navCount = siteConfig.navigators.length
 					hover:bg-primary-hover
 				`}
 			>
-				{siteConfig.brandTitle}
+				{SITE.name}
 			</a>
 		</div>
 
@@ -67,7 +67,7 @@ const navCount = siteConfig.navigators.length
 		>
 			<div class='flex h-full flex-row content-center items-center space-x-2 font-brand text-2xl text-primary'>
 				<Icon name='line-md:home-md' size={32} />
-				<p>{siteConfig.brandTitle}</p>
+				<p>{SITE.name}</p>
 			</div>
 		</a>
 
@@ -80,7 +80,7 @@ const navCount = siteConfig.navigators.length
 			aria-label='メインナビゲーション'
 		>
 			{
-				siteConfig.navigators.map((item) => (
+				SITE.navigators.map((item) => (
 					<a
 						href={item.href}
 						class={`
@@ -153,7 +153,7 @@ const navCount = siteConfig.navigators.length
 			`}
 		>
 			{
-				siteConfig.navigators.map((item) => (
+				SITE.navigators.map((item) => (
 					<li class='mt-1'>
 						<a href={item.href} data-mobile-nav-item class='flex flex-row items-center justify-between font-primary'>
 							<div class='flex flex-row items-center space-x-2'>

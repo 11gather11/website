@@ -10,7 +10,6 @@
         "@fontsource-variable/jetbrains-mono": "5.2.8",
         "@fontsource-variable/noto-sans-jp": "5.2.9",
         "@fontsource-variable/raleway": "5.2.8",
-        "@fontsource/poiret-one": "5.2.8",
         "@iconify-json/line-md": "1.2.11",
         "@iconify-json/tabler": "1.2.23",
         "@playform/compress": "0.2.0",
@@ -407,8 +406,6 @@
     "@fontsource-variable/noto-sans-jp": ["@fontsource-variable/noto-sans-jp@5.2.9", "", {}, "sha512-osPL5f7dvGDjuMuFwDTGPLG37030D8X5zk+3BWea6txAVDFeE/ZIrKW0DY0uSDfRn9+NiKbiFn/2QvZveKXTog=="],
 
     "@fontsource-variable/raleway": ["@fontsource-variable/raleway@5.2.8", "", {}, "sha512-PahqGI7bkz4a80m91Jt65DRsuFQmRip5vGDbI9sChVSKjLrdDfXbeGIwnTPi/ZVCOoQrbLnqzBOLQpLohnz+WA=="],
-
-    "@fontsource/poiret-one": ["@fontsource/poiret-one@5.2.8", "", {}, "sha512-w/sOQ0ctiIx730UdG+AChxtIqfOnORQUbFbyy+ALNh6YXCBAmLW2LmGMLCyg5F897bTrAGZoLvvkxXZ4IXopnQ=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.1", "", {}, "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="],
 
