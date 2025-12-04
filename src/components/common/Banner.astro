@@ -2,7 +2,7 @@
 import type { ImageMetadata } from 'astro'
 import { Image } from 'astro:assets'
 
-import { BANNERS, IMAGE_WIDTHS, SITE } from '@/config'
+import { BANNERS, SITE } from '@/config'
 import { getCoverImageByID } from '@/utils/cover'
 
 interface Props {
@@ -67,8 +67,6 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 									src={img}
 									alt={`バナー画像 ${index + 1}`}
 									class='h-full w-full object-cover'
-									widths={[...IMAGE_WIDTHS]}
-									sizes='100vw'
 									loading={index === 0 ? 'eager' : 'lazy'}
 								/>
 							</li>
@@ -92,10 +90,7 @@ const bannerImageUrl = bannerImage ?? (slug ? getCoverImageByID(slug) : undefine
 						class='h-full w-full object-cover'
 						src={bannerImageUrl}
 						alt={title ? `${title}のバナー画像` : 'バナー画像'}
-						widths={[...IMAGE_WIDTHS]}
-						sizes='100vw'
 						loading='eager'
-						fetchpriority='high'
 					/>
 				</div>
 			)

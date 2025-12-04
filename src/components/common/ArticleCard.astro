@@ -4,7 +4,6 @@ import type { CollectionEntry } from 'astro:content'
 import { render } from 'astro:content'
 import { Icon } from 'astro-icon/components'
 
-import { IMAGE_WIDTHS } from '@/config'
 import { getCoverImageByID } from '@/utils/cover'
 import { formatDate } from '@/utils/date'
 
@@ -61,8 +60,6 @@ const categorySlug = category ? category : null
 			`}
 			src={coverImageUrl}
 			alt={`${title}のカバー画像`}
-			widths={[...IMAGE_WIDTHS]}
-			sizes='100vw'
 			loading='lazy'
 		/>
 		<!-- モバイル用オーバーレイ情報 -->
@@ -298,8 +295,6 @@ const categorySlug = category ? category : null
 					`}
 					src={coverImageUrl}
 					alt={`${title}のカバー画像`}
-					widths={[...IMAGE_WIDTHS]}
-					sizes='404px'
 					loading='lazy'
 				/>
 			</a>
