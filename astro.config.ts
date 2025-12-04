@@ -3,6 +3,7 @@ import compress from '@playform/compress'
 import swup from '@swup/astro'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
+import expressiveCode from 'astro-expressive-code'
 import icon from 'astro-icon'
 import pagefind from 'astro-pagefind'
 import rehypeExternalLinks from 'rehype-external-links'
@@ -42,6 +43,16 @@ export default defineConfig({
 			updateHead: true,
 			updateBodyClass: false,
 			globalInstance: true,
+		}),
+		expressiveCode({
+			themes: ['github-light', 'github-dark'],
+			customizeTheme: (theme) => {
+				theme.name = theme.type
+				return theme
+			},
+			defaultProps: {
+				wrap: true,
+			},
 		}),
 		icon(),
 		sitemap(),
