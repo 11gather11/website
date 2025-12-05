@@ -19,7 +19,7 @@
 }
 
 @utility onload-animation-fade-in {
-	opacity: 0;
+	opacity: 0.01;
 	animation: 300ms fade-in ease-in;
 	animation-fill-mode: forwards;
 }
