@@ -24,7 +24,7 @@ const { title } = Astro.props
 		<Favicons />
 		<Metadata title={title} />
 	</head>
-	<body class='bg-background font-sans tracking-tight text-foreground antialiased'>
+	<body class='overflow-y-hidden bg-background font-sans tracking-tight text-foreground antialiased'>
 		<slot />
 
 		<BasicScripts />
