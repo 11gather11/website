@@ -29,5 +29,10 @@ jobs:
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65 # v3.14.1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          # アカウント ID を渡さないと、wrangler は /accounts を呼んで
+          # アカウントを一覧しようとする。アカウント所有のトークンは特定の
+          # アカウントに固定されているので、その一覧でつまずきうる。
+          # ここで渡せば、その呼び出し自体が要らなくなる
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           wranglerVersion: "latest"
           command: deploy
